@@ -1,0 +1,8 @@
+{
+  "name": "digidaan-nuxt",
+  "version": "1.0.0",
+  "description": "Digidaan website written in Nuxt",
+  "main": "index.js",
+  "author": "Daan van Geloven ",
+  "license": "MIT"
+}

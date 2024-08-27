@@ -1,0 +1,34 @@
+{
+  "experience": [
+    {
+      "company": "Jumbo Supermarkten.",
+      "job": "Front-end Developer",
+      "description": "Working with a team to maintain and expand the Jumbo Extra's app. A project with rapid development and nearly 1.9 million active users",
+      "date": "2024 - present"
+    },
+    {
+      "company": "Jumbo Supermarkten.",
+      "job": "IAM Developer",
+      "description": "Collaborate with IAM specialists to mantain and expand the identity infrastructure for over 100.000 employees.",
+      "date": "2023 - 2024"
+    },
+    {
+      "company": "Digidaan IT Services.",
+      "job": "Full Stack Developer",
+      "description": "Working independently on a diverse range of IT projects. Both in developing new systems and supporting existing ones.",
+      "date": "2021 - Present"
+    },
+    {
+      "company": "Summa College.",
+      "job": "Intern",
+      "description": "Worked on a new IOT-system to monitor and respond to various climate conditions within Summa College's buildings.",
+      "date": "2020 - 2021"
+    },
+    {
+      "company": "ASML Netherlands.",
+      "job": "Intern",
+      "description": "Helped to maintain and expand the internal information infrastructure.",
+      "date": "2019 - 2020"
+    }
+  ]
+}

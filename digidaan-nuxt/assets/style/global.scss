@@ -1,0 +1,22 @@
+@import "colors";
+
+.w95-button-border {
+  border-top: 2px solid #fcfcfc;
+  border-left: 2px solid #fcfcfc;
+  border-bottom: 2px solid #08080e;
+  border-right: 2px solid #08080e;
+}
+
+.w95-border {
+  border-top: 1px solid #fcfcfc;
+  border-left: 1px solid #fcfcfc;
+  border-bottom: 1px solid #08080e;
+  border-right: 1px solid #08080e;
+}
+
+.w95-border-inverse {
+  border-top: 1px solid #08080e;
+  border-left: 1px solid #08080e;
+  border-bottom: 1px solid #fcfcfc;
+  border-right: 1px solid #fcfcfc;
+}

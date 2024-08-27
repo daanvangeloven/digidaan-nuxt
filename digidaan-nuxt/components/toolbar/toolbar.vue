@@ -1,0 +1,104 @@
+<template>
+  <div class="toolbar">
+    <div class="toolbar-start toolbar-item">
+      <span class="start-button-inner-text w95-button-border">
+        <img class="tab-icon" src="~/assets/img/w95-icon.png" />
+        <span>Start</span>
+      </span>
+    </div>
+
+    <div class="open-tabs">
+      <div class="tab w95-button-border toolbar-item">
+        <img class="tab-icon" src="~/assets/img/icons/computer.png" />
+        <span>My Computer</span>
+      </div>
+      <div class="tab active w95-button-border toolbar-item">
+        <img class="tab-icon" src="~/assets/img/icons/user_card.png" />
+        <span>About Me</span>
+      </div>
+    </div>
+
+    <div class="toolbar-timer tab w95-border-inverse toolbar-item">18:34</div>
+  </div>
+</template>
+
+<script lang="ts"></script>
+
+<style lang="scss">
+@import "@/assets/style/global";
+
+.toolbar {
+  width: 100vw;
+  height: 30px;
+  font-size: 0.65rem;
+
+  background-color: $secondary-background;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ensures Start on the left, Timer on the right */
+
+  .toolbar-item {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    vertical-align: middle;
+    color: $text-dark;
+    font-size: 0.65rem;
+    height: 20px;
+  }
+}
+
+.toolbar-start {
+  cursor: pointer;
+}
+
+.start-button-inner-text {
+  margin-left: 0.25rem;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+
+  img {
+    margin-right: 0.25rem;
+  }
+}
+
+.open-tabs {
+  flex-grow: 1; /* Takes up remaining space between Start button and Timer */
+  display: flex;
+  align-items: center;
+  margin-left: 4px;
+  overflow-x: auto; /* Allows scrolling if there are too many tabs */
+}
+
+.tab {
+  margin-right: 2px;
+  padding: 0 4px;
+  color: $text-dark;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &.active {
+    background: repeating-conic-gradient(#808080 0% 25%, #fff 0% 50%) 50% / 2px
+      2px;
+    color: $text-dark;
+    font-weight: 400;
+    border-top: 1px solid $border-dark !important;
+    border-left: 1px solid $border-dark !important;
+    border-bottom: 1px solid $border-light !important;
+    border-right: 1px solid $border-light !important;
+  }
+}
+
+.tab-icon {
+  margin-right: 0.25rem;
+  max-height: 80%;
+  max-width: 25px;
+}
+
+.toolbar-timer {
+  margin-right: 4px;
+}
+</style>
