@@ -1,7 +1,11 @@
 <template>
+  <start-menu v-if="showStartMenu"> </start-menu>
   <div class="toolbar">
     <div class="toolbar-start toolbar-item">
-      <span class="start-button-inner-text w95-button-border">
+      <span
+        @click="toggleStartMenu()"
+        class="start-button-inner-text w95-button-border"
+      >
         <img class="tab-icon" src="~/assets/img/w95-icon.png" />
         <span>Start</span>
       </span>
@@ -17,20 +21,32 @@
         <span>About Me</span>
       </div>
     </div>
-
     <div class="toolbar-timer tab w95-border-inverse toolbar-item">18:34</div>
   </div>
 </template>
 
-<script lang="ts"></script>
+<script lang="ts">
+const showStartMenu = ref(false);
+
+const toggleStartMenu = () => {
+  showStartMenu.value = !showStartMenu.value;
+};
+
+export default {
+  setup() {
+    return { showStartMenu, toggleStartMenu };
+  },
+};
+</script>
 
 <style lang="scss">
 @import "@/assets/style/global";
 
 .toolbar {
   width: 100vw;
-  height: 30px;
+  height: 23px;
   font-size: 0.65rem;
+  padding: 7px;
 
   background-color: $secondary-background;
   position: fixed;
@@ -55,7 +71,6 @@
 }
 
 .start-button-inner-text {
-  margin-left: 0.25rem;
   display: flex;
   align-items: center;
   padding: 0 4px;
@@ -99,6 +114,7 @@
 }
 
 .toolbar-timer {
-  margin-right: 4px;
+  margin-right: 10px;
+  padding: 5px 15px;
 }
 </style>
