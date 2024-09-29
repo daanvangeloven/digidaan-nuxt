@@ -1,29 +1,16 @@
 /*
 * Variables for breakpoints
 */
-$mobile-landscape: 568px;
-$tablet: 768px;
-$desktop: 992px;
-
-/*
-* Map for breakpoints
-*/
 $breakpoints: (
-  "small": (
-    min-width: $mobile-landscape,
-  ),
-  "medium": (
-    min-width: $tablet,
-  ),
-  "large": (
-    min-width: $desktop,
-  ),
+  xxs: 20em,
+  // 320px
+  xs: 30em,
+  // 480px
+  sm: 48em,
+  // 768px
+  md: 64em,
+  // 1024px
+  lg: 80em,
+  // 1280px
+  xl: 120em // 1920px,,,,
 );
-
-@mixin responsive($size) {
-  $query: map-get($breakpoints, $size);
-
-  @media #{$query} {
-    @content;
-  }
-}

@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/style/global";
+@import "@/assets/style/index";
 
 @font-face {
   font-family: "Windows 95";
@@ -26,21 +26,45 @@ export default {
   font-style: normal;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-y: auto; /* Allow vertical scrolling */
+  height: 100%;
+}
+
 body {
   background-color: $base-background;
-  background-image: url("../assets/img/w95-backgroundlogo.png");
+  background-image: url("/img/w95-backgroundlogo.png");
   background-repeat: no-repeat;
   background-size: 30%;
   background-position: center;
-}
-
-* {
   font-family: "Windows 95", sans-serif;
 }
+
 .content {
-  height: 100vh;
-  cursor: auto;
+  height: 100%;
+  max-height: 100%;
+  overflow-x: hidden;
   padding: 0;
   margin: 0;
+  cursor: auto;
+}
+
+@media (max-width: 600px) {
+  body {
+    background-size: 40%;
+  }
+
+  .content {
+    height: auto;
+    padding-bottom: 0;
+  }
 }
 </style>

@@ -1,23 +1,23 @@
 <template>
-  <start-menu v-if="showStartMenu"> </start-menu>
+  <start-menu class="start-menu" v-if="showStartMenu"> </start-menu>
   <div class="toolbar">
     <div class="toolbar-start toolbar-item">
       <span
-        @click="toggleStartMenu()"
+        @click="handleStartButtonClick($event)"
         class="start-button-inner-text w95-button-border"
       >
-        <img class="tab-icon" src="~/assets/img/w95-icon.png" />
+        <img class="tab-icon" src="/img/w95-icon.png" />
         <span>Start</span>
       </span>
     </div>
 
     <div class="open-tabs">
       <div class="tab w95-button-border toolbar-item">
-        <img class="tab-icon" src="~/assets/img/icons/computer.png" />
+        <img class="tab-icon" src="/img/icons/computer.png" />
         <span>My Computer</span>
       </div>
-      <div class="tab active w95-button-border toolbar-item">
-        <img class="tab-icon" src="~/assets/img/icons/user_card.png" />
+      <div class="tab w95-button-border toolbar-item">
+        <img class="tab-icon" src="/img/icons/experience.png" />
         <span>About Me</span>
       </div>
     </div>
@@ -26,34 +26,61 @@
 </template>
 
 <script lang="ts">
-const showStartMenu = ref(false);
-
-const toggleStartMenu = () => {
-  showStartMenu.value = !showStartMenu.value;
-};
-
 export default {
   setup() {
-    return { showStartMenu, toggleStartMenu };
+    const showStartMenu = ref(false);
+
+    const toggleStartMenu = () => {
+      showStartMenu.value = !showStartMenu.value;
+    };
+
+    const handleStartButtonClick = (e: Event) => {
+      e.stopPropagation();
+      toggleStartMenu();
+    };
+
+    const handleWindowClick = (e: Event) => {
+      if (
+        showStartMenu.value &&
+        !(e.target as HTMLElement).closest(".start-menu")
+      ) {
+        showStartMenu.value = false;
+      }
+    };
+
+    onMounted(() => {
+      window.addEventListener("click", handleWindowClick);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener("click", handleWindowClick);
+    });
+
+    return {
+      showStartMenu,
+      handleStartButtonClick,
+    };
   },
 };
 </script>
 
 <style lang="scss">
-@import "@/assets/style/global";
+@import "@/assets/style/index";
 
 .toolbar {
   width: 100vw;
-  height: 23px;
+  height: 36px;
   font-size: 0.65rem;
   padding: 7px;
+  user-select: none;
 
   background-color: $secondary-background;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   display: flex;
   align-items: center;
   justify-content: space-between; /* Ensures Start on the left, Timer on the right */
+  overflow: hidden;
 
   .toolbar-item {
     display: flex;
@@ -62,7 +89,7 @@ export default {
     vertical-align: middle;
     color: $text-dark;
     font-size: 0.65rem;
-    height: 20px;
+    height: 24px;
   }
 }
 
@@ -114,7 +141,6 @@ export default {
 }
 
 .toolbar-timer {
-  margin-right: 10px;
   padding: 5px 15px;
 }
 </style>

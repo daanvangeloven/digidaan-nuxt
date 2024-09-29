@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "title": "Profile",
+      "modal": "profile",
+      "icon": "profile.png"
+    },
+    {
+      "title": "About me",
+      "modal": "about",
+      "icon": "help.png"
+    },
+    {
+      "title": "Projects",
+      "modal": "projects",
+      "icon": "projects.png"
+    },
+    {
+      "title": "Experience",
+      "modal": "experience",
+      "icon": "experience.png"
+    },
+    {
+      "title": "Contact",
+      "modal": "contact",
+      "icon": "contact.png"
+    },
+    {
+      "title": "This Computer",
+      "modal": "computer",
+      "icon": "computer.png"
+    }
+  ]
+}
