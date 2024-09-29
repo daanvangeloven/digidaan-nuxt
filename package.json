@@ -12,7 +12,6 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxtjs/composition-api": "^0.34.0",
     "nuxt": "^3.12.4",
     "sass": "^16.0.2",
     "vue": "^3.4.37"
