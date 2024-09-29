@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <DesktopIcons />
     <Toolbar />
   </div>
 </template>
