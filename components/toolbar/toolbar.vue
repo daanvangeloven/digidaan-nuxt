@@ -4,7 +4,7 @@
     <div class="toolbar-start toolbar-item">
       <span
         @click="handleStartButtonClick($event)"
-        class="start-button-inner-text w95-button-border"
+        class="start-button-inner-text tab w95-button-border"
       >
         <img class="tab-icon" src="/img/w95-icon.png" />
         <span>Start</span>
@@ -32,6 +32,8 @@ export default {
 
     const toggleStartMenu = () => {
       showStartMenu.value = !showStartMenu.value;
+      const startButton = document.querySelector(".start-button-inner-text");
+      startButton?.classList.toggle("active");
     };
 
     const handleStartButtonClick = (e: Event) => {
@@ -44,7 +46,7 @@ export default {
         showStartMenu.value &&
         !(e.target as HTMLElement).closest(".start-menu")
       ) {
-        showStartMenu.value = false;
+        toggleStartMenu();
       }
     };
 

@@ -1,0 +1,52 @@
+{
+  "screens": [
+    {
+      "id": "profile",
+      "title": "Profile",
+      "icon": "profile.png",
+      "content": "ProfileContent",
+      "onDesktop": true,
+      "onStartMenu": true
+    },
+    {
+      "id": "about",
+      "title": "About me",
+      "icon": "help.png",
+      "content": "<content>",
+      "onDesktop": true,
+      "onStartMenu": true
+    },
+    {
+      "id": "projects",
+      "title": "Projects",
+      "icon": "projects.png",
+      "content": "<content>",
+      "onDesktop": true,
+      "onStartMenu": true
+    },
+    {
+      "id": "experience",
+      "title": "Experience",
+      "icon": "experience.png",
+      "content": "<content>",
+      "onDesktop": true,
+      "onStartMenu": true
+    },
+    {
+      "id": "contact",
+      "title": "Contact",
+      "icon": "contact.png",
+      "content": "<content>",
+      "onDesktop": true,
+      "onStartMenu": true
+    },
+    {
+      "id": "computer",
+      "title": "This Computer",
+      "icon": "computer.png",
+      "content": "<content>",
+      "onDesktop": true,
+      "onStartMenu": true
+    }
+  ]
+}
