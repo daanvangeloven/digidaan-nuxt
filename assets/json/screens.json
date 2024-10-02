@@ -12,7 +12,7 @@
       "id": "about",
       "title": "About me",
       "icon": "help.png",
-      "content": "<content>",
+      "content": "ProfileContent",
       "onDesktop": true,
       "onStartMenu": true
     },
@@ -20,7 +20,7 @@
       "id": "projects",
       "title": "Projects",
       "icon": "projects.png",
-      "content": "<content>",
+      "content": "ProfileContent",
       "onDesktop": true,
       "onStartMenu": true
     },
@@ -28,7 +28,7 @@
       "id": "experience",
       "title": "Experience",
       "icon": "experience.png",
-      "content": "<content>",
+      "content": "ProfileContent",
       "onDesktop": true,
       "onStartMenu": true
     },
@@ -36,7 +36,7 @@
       "id": "contact",
       "title": "Contact",
       "icon": "contact.png",
-      "content": "<content>",
+      "content": "ProfileContent",
       "onDesktop": true,
       "onStartMenu": true
     },
@@ -44,7 +44,7 @@
       "id": "computer",
       "title": "This Computer",
       "icon": "computer.png",
-      "content": "<content>",
+      "content": "ProfileContent",
       "onDesktop": true,
       "onStartMenu": true
     }

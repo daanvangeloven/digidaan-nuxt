@@ -12,13 +12,13 @@
     </div>
 
     <div class="open-tabs">
-      <div class="tab w95-button-border toolbar-item">
-        <img class="tab-icon" src="/img/icons/computer.png" />
-        <span>My Computer</span>
-      </div>
-      <div class="tab w95-button-border toolbar-item">
-        <img class="tab-icon" src="/img/icons/experience.png" />
-        <span>About Me</span>
+      <div
+        @click="openModal(tab.id)"
+        v-for="tab in taskbar"
+        class="tab w95-button-border toolbar-item"
+      >
+        <img class="tab-icon" :src="`img/icons/${tab.icon}`" />
+        <span>{{ tab.title }}</span>
       </div>
     </div>
     <div class="toolbar-timer tab w95-border-inverse toolbar-item">18:34</div>
@@ -26,6 +26,12 @@
 </template>
 
 <script lang="ts">
+import { useModals } from "@/composables/useModals";
+
+const { modals, openModal } = useModals();
+
+const taskbar = computed(() => modals.value.filter((modal) => modal.taskbar));
+
 export default {
   setup() {
     const showStartMenu = ref(false);
@@ -61,6 +67,8 @@ export default {
     return {
       showStartMenu,
       handleStartButtonClick,
+      taskbar,
+      openModal,
     };
   },
 };

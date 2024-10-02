@@ -4,7 +4,12 @@
       Digidaan DaanOS <span class="text-white">'02</span>
     </div>
     <div class="start-list">
-      <div class="start-item" v-for="item in screens" :key="item.id">
+      <div
+        class="start-item"
+        v-for="item in screens"
+        @click="itemClick(item.id)"
+        :key="item.id"
+      >
         <img :src="`/img/icons/${item.icon}`" class="start-icon" />
 
         {{ item.title }}
@@ -14,6 +19,13 @@
 </template>
 <script lang="ts">
 import data from "@/assets/json/screens.json";
+import { useModals } from "@/composables/useModals";
+
+const { openModal } = useModals();
+
+const itemClick = (modalId: any) => {
+  openModal(modalId);
+};
 
 const screens = data.screens.filter((screen) => screen.onStartMenu === true);
 export default {
@@ -21,6 +33,9 @@ export default {
     return {
       screens,
     };
+  },
+  methods: {
+    itemClick,
   },
 };
 </script>
