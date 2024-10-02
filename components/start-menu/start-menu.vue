@@ -4,7 +4,7 @@
       Digidaan DaanOS <span class="text-white">'02</span>
     </div>
     <div class="start-list">
-      <div class="start-item" v-for="item in data.items" :key="item.modal">
+      <div class="start-item" v-for="item in screens" :key="item.id">
         <img :src="`/img/icons/${item.icon}`" class="start-icon" />
 
         {{ item.title }}
@@ -13,12 +13,13 @@
   </div>
 </template>
 <script lang="ts">
-import data from "@/assets/json/startmenu.json";
+import data from "@/assets/json/screens.json";
 
+const screens = data.screens.filter((screen) => screen.onStartMenu === true);
 export default {
   data() {
     return {
-      data,
+      screens,
     };
   },
 };

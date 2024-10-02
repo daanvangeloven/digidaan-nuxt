@@ -1,24 +1,20 @@
 <template>
   <div class="desktop-icons">
-    <div
-      v-for="icon in data.items"
-      :key="icon.modal"
-      class="desktop-icon"
-      :style="{ top: icon.top, left: icon.left }"
-    >
-      <img :src="`/img/icons/${icon.icon}`" alt="icon" class="icon-img" />
-      <span>{{ icon.title }}</span>
+    <div v-for="item in screens" :key="item.id" class="desktop-icon">
+      <img :src="`/img/icons/${item.icon}`" alt="icon" class="icon-img" />
+      <span>{{ item.title }} </span>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import data from "@/assets/json/startmenu.json";
+import data from "@/assets/json/screens.json";
 
+const screens = data.screens.filter((screen) => screen.onDesktop === true);
 export default {
   data() {
     return {
-      data,
+      screens,
     };
   },
 };
@@ -40,6 +36,7 @@ $img-size-sm: 24px;
   font-size: 13px;
   gap: 16px;
   color: $text-light;
+  user-select: none;
 }
 
 .desktop-icon {

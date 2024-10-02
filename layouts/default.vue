@@ -1,6 +1,11 @@
 <template>
   <div class="content">
     <DesktopIcons />
+    <Modal>
+      <template #header-title>
+        <span>Modal Title</span>
+      </template>
+    </Modal>
     <Toolbar />
   </div>
 </template>
@@ -35,8 +40,8 @@ export default {
 
 html,
 body {
-  overflow-x: hidden; /* Prevent horizontal scroll */
-  overflow-y: auto; /* Allow vertical scrolling */
+  overflow-x: hidden;
+  overflow-y: auto;
   height: 100%;
 }
 
