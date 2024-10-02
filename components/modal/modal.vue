@@ -49,6 +49,9 @@ export default {
     let offsetY = 0;
 
     const onMouseDown = (event: MouseEvent) => {
+      if ((event.target as HTMLElement).closest(".control-button")) {
+        return;
+      }
       isDragging = true;
       const modalRect = modal.value!.getBoundingClientRect();
       offsetX = event.clientX - modalRect.left;

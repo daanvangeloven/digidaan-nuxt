@@ -1,32 +1,8 @@
 <template>
-  <div class="content">
-    <DesktopIcons />
-    <div v-for="modal in modals">
-      <Modal
-        v-if="!modal.minimized"
-        :id="modal.id"
-        :style="{ 'z-index': modal.zIndex }"
-      >
-        <template #header-title>
-          <span>{{ modal.title }}</span>
-        </template>
-        <template #modal-content><component :is="modal.content" /> </template>
-      </Modal>
-    </div>
-    <Toolbar />
-  </div>
+  <NuxtPage />
 </template>
-
 <script lang="ts">
-import ProfileContent from "@/components/modal/modalcontent/ProfileContent.vue";
-import { useModals } from "@/composables/useModals";
-
-const { modals } = useModals();
-
 export default {
-  components: {
-    ProfileContent,
-  },
   head() {
     return {
       bodyAttrs: {
@@ -34,64 +10,35 @@ export default {
       },
     };
   },
-  data() {
-    return {
-      modals,
-    };
+  setup() {
+    useSeoMeta({
+      title: "Digidaan DaanOS '02",
+      description:
+        "A Windows 95 inspired portfolio for my front-end development work.",
+      ogTitle: "Digidaan - Daan van Geloven",
+      ogDescription:
+        "Go back in time with my Windows 95 inspired portfolio. Built with NuxtJS and Vue 3.",
+      ogImage: "/img/w95-backgroundlogo.png",
+      ogUrl: "https://digidaan.io",
+      twitterTitle: "Digidaan",
+      twitterDescription:
+        "A Windows 95 inspired portfolio for my front-end development work.",
+      twitterImage: "/img/w95-backgroundlogo.png",
+      twitterCard: "summary",
+    });
+
+    useHead({
+      htmlAttrs: {
+        lang: "en",
+      },
+      link: [
+        {
+          rel: "icon",
+          type: "image/png",
+          href: "/img/w95-icon.png",
+        },
+      ],
+    });
   },
-  setup() {},
 };
 </script>
-
-<style lang="scss">
-@import "@/assets/style/index";
-
-@font-face {
-  font-family: "Windows 95";
-  src: url("../assets/fonts/w-95-sans-serif.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  overflow-x: hidden;
-  overflow-y: auto;
-  height: 100%;
-}
-
-body {
-  background-color: $base-background;
-  background-image: url("/img/w95-backgroundlogo.png");
-  background-repeat: no-repeat;
-  background-size: 30%;
-  background-position: center;
-  font-family: "Windows 95", sans-serif;
-}
-
-.content {
-  height: 100%;
-  max-height: 100%;
-  overflow-x: hidden;
-  padding: 0;
-  margin: 0;
-  cursor: auto;
-}
-
-@media (max-width: 600px) {
-  body {
-    background-size: 40%;
-  }
-
-  .content {
-    height: auto;
-    padding-bottom: 0;
-  }
-}
-</style>

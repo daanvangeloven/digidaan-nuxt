@@ -1,5 +1,4 @@
-// composables/useModals.ts
-import { ref } from "vue";
+import { ref, markRaw } from "vue";
 import type { Modal } from "~/types/modal";
 import data from "@/assets/json/screens.json";
 
@@ -25,7 +24,7 @@ async function addModal(screenData: any) {
       id: screenData.id,
       title: screenData.title,
       icon: screenData.icon,
-      content: component,
+      content: markRaw(component),
       minimized: false,
       taskbar: true,
       zIndex: zIndexCounter.value++,
