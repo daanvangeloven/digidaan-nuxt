@@ -1,6 +1,11 @@
 <template>
   <div class="desktop-icons">
-    <div v-for="item in screens" :key="item.id" class="desktop-icon">
+    <div
+      v-for="item in screens"
+      :key="item.id"
+      @click="itemClick(item.id)"
+      class="desktop-icon"
+    >
       <img :src="`/img/icons/${item.icon}`" alt="icon" class="icon-img" />
       <span>{{ item.title }} </span>
     </div>
@@ -9,6 +14,13 @@
 
 <script lang="ts">
 import data from "@/assets/json/screens.json";
+import { useModals } from "@/composables/useModals";
+
+const { openModal } = useModals();
+
+const itemClick = (modalId: any) => {
+  openModal(modalId);
+};
 
 const screens = data.screens.filter((screen) => screen.onDesktop === true);
 export default {
@@ -16,6 +28,9 @@ export default {
     return {
       screens,
     };
+  },
+  methods: {
+    itemClick,
   },
 };
 </script>

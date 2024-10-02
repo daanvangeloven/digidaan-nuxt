@@ -2,10 +2,10 @@
   <div class="profile-content">
     <div class="header">
       <img src="/img/profile/portrait.png" alt="User" />
-      <h1 class="title">Hello, I’m Daan van Geloven a Web Wizard.</h1>
+      <h1 class="title">Hello, I’m Daan van Geloven.</h1>
     </div>
     <div class="body">
-      <h3 class="subtitle">Independent Full-Stack Developer</h3>
+      <h3 class="subtitle">Front-end Developer</h3>
     </div>
   </div>
 </template>

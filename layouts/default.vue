@@ -1,17 +1,32 @@
 <template>
   <div class="content">
     <DesktopIcons />
-    <Modal>
-      <template #header-title>
-        <span>Modal Title</span>
-      </template>
-    </Modal>
+    <div v-for="modal in modals">
+      <Modal
+        v-if="!modal.minimized"
+        :id="modal.id"
+        :style="{ 'z-index': modal.zIndex }"
+      >
+        <template #header-title>
+          <span>{{ modal.title }}</span>
+        </template>
+        <template #modal-content><component :is="modal.content" /> </template>
+      </Modal>
+    </div>
     <Toolbar />
   </div>
 </template>
 
 <script lang="ts">
+import ProfileContent from "@/components/modal/modalcontent/ProfileContent.vue";
+import { useModals } from "@/composables/useModals";
+
+const { modals } = useModals();
+
 export default {
+  components: {
+    ProfileContent,
+  },
   head() {
     return {
       bodyAttrs: {
@@ -19,6 +34,12 @@ export default {
       },
     };
   },
+  data() {
+    return {
+      modals,
+    };
+  },
+  setup() {},
 };
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" ref="modal">
+  <div @mousedown="bringToFront(id)" class="modal" ref="modal">
     <div class="modal-header" ref="modalHeader">
       <div class="header-item">
         <img src="/img/icons/profile.png" class="modal-icon" />
@@ -8,33 +8,46 @@
         </div>
       </div>
       <div class="header-item">
-        <button class="control-button w95-button-border">-</button>
-        <button class="control-button close-button w95-button-border">X</button>
+        <button
+          @click="minimizeModal(id)"
+          class="control-button w95-button-border"
+        >
+          -
+        </button>
+        <button
+          @click="closeModal(id)"
+          class="control-button close-button w95-button-border"
+        >
+          X
+        </button>
       </div>
     </div>
     <div class="modal-content">
-      <slot> </slot>
-      <ProfileContent />
+      <slot name="modal-content"> </slot>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
-import ProfileContent from "@/components/modal/modalcontent/ProfileContent.vue";
+import { useModals } from "@/composables/useModals";
+
+const { closeModal, minimizeModal, modalMoved, bringToFront } = useModals();
 
 export default {
-  components: {
-    ProfileContent,
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
   },
-  setup() {
+  setup(props) {
     const modal = ref<HTMLElement | null>(null);
     const modalHeader = ref<HTMLElement | null>(null);
     let isDragging = false;
     let offsetX = 0;
     let offsetY = 0;
 
-    // Handle when the user presses the mouse button down on the modal header
     const onMouseDown = (event: MouseEvent) => {
       isDragging = true;
       const modalRect = modal.value!.getBoundingClientRect();
@@ -51,31 +64,28 @@ export default {
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight - 36; // 36px toolbar height
 
-        // Calculate the new left and top values
         let newLeft = event.clientX - offsetX;
         let newTop = event.clientY - offsetY;
 
-        // Constrain horizontal (left) movement within the viewport
         if (newLeft < 0) {
-          newLeft = 0; // Prevent dragging past the left edge
+          newLeft = 0;
         } else if (newLeft + modalRect.width > viewportWidth) {
-          newLeft = viewportWidth - modalRect.width; // Prevent dragging past the right edge
+          newLeft = viewportWidth - modalRect.width;
         }
 
-        // Constrain vertical (top) movement within the viewport
         if (newTop < 0) {
-          newTop = 0; // Prevent dragging past the top edge
+          newTop = 0;
         } else if (newTop + modalRect.height > viewportHeight) {
-          newTop = viewportHeight - modalRect.height; // Prevent dragging past the bottom edge
+          newTop = viewportHeight - modalRect.height;
         }
 
-        // Apply the new constrained positions
         modal.value!.style.left = `${newLeft}px`;
         modal.value!.style.top = `${newTop}px`;
+
+        modalMoved(props.id, newLeft, newTop);
       }
     };
 
-    // Handle when the user releases the mouse button to stop dragging
     const onMouseUp = () => {
       isDragging = false;
       document.removeEventListener("mousemove", onMouseMove);
@@ -83,14 +93,12 @@ export default {
     };
 
     onMounted(() => {
-      // Ensure modalHeader exists before adding the event listener
       if (modalHeader.value) {
         modalHeader.value.addEventListener("mousedown", onMouseDown);
       }
     });
 
     onBeforeUnmount(() => {
-      // Clean up event listeners when the component is destroyed
       if (modalHeader.value) {
         modalHeader.value.removeEventListener("mousedown", onMouseDown);
       }
@@ -99,6 +107,9 @@ export default {
     return {
       modal,
       modalHeader,
+      closeModal,
+      minimizeModal,
+      bringToFront,
     };
   },
 };
