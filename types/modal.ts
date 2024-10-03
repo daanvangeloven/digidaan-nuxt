@@ -6,6 +6,7 @@ export interface Modal {
   title: string;
   icon: string;
   content: Component;
+  contentName: string;
   minimized: boolean;
   taskbar: boolean;
   zIndex: number;

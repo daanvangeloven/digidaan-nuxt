@@ -2,11 +2,15 @@
   <LoadingBar v-if="loading" class="loading"></LoadingBar>
   <div v-else class="content">
     <DesktopIcons />
-    <div v-for="modal in modals">
+    <div v-for="modal in modalStore.modals">
       <Modal
         :id="modal.id"
         :class="{ minimized: modal.minimized }"
-        :style="{ 'z-index': modal.zIndex }"
+        :style="{
+          'z-index': modal.zIndex,
+          left: `${modal.x}px`,
+          top: `${modal.y}px`,
+        }"
       >
         <template #header-title>
           <span>{{ modal.title }}</span>
@@ -20,11 +24,7 @@
 
 <script lang="ts">
 import LoadingBar from "@/components/loading-bar/LoadingBar.vue";
-import { useModals } from "@/composables/useModals";
-
-const { modals } = useModals();
-
-const loading = ref(true);
+import { useModalStore } from "@/composables/useModals";
 
 export default {
   components: {
@@ -37,16 +37,15 @@ export default {
       },
     };
   },
-  data() {
-    return {
-      modals,
-      loading,
-    };
-  },
   setup() {
+    const modalStore = useModalStore();
+    const loading = ref(true);
+
     onMounted(() => {
       loading.value = false;
     });
+
+    return { modalStore, loading };
   },
 };
 </script>

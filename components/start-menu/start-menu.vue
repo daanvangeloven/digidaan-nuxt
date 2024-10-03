@@ -19,23 +19,24 @@
 </template>
 <script lang="ts">
 import data from "@/assets/json/screens.json";
-import { useModals } from "@/composables/useModals";
+import { useModalStore } from "@/composables/useModals";
 
-const { openModal } = useModals();
-
-const itemClick = (modalId: any) => {
-  openModal(modalId);
-};
-
-const screens = data.screens.filter((screen) => screen.onStartMenu === true);
 export default {
-  data() {
+  setup() {
+    const { openModal } = useModalStore();
+
+    const itemClick = (modalId: any) => {
+      openModal(modalId);
+    };
+
+    const screens = data.screens.filter(
+      (screen) => screen.onStartMenu === true
+    );
+
     return {
       screens,
+      itemClick,
     };
-  },
-  methods: {
-    itemClick,
   },
 };
 </script>

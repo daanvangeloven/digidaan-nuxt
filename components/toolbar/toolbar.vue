@@ -15,7 +15,9 @@
       <div
         @click="openModal(tab.id)"
         v-for="tab in taskbar"
+        :key="tab.id"
         class="tab w95-button-border toolbar-item"
+        :class="{ active: tab.id === modalStore.activeModal }"
       >
         <img class="tab-icon" :src="`img/icons/${tab.icon}`" />
         <span>{{ tab.title }}</span>
@@ -26,14 +28,18 @@
 </template>
 
 <script lang="ts">
-import { useModals } from "@/composables/useModals";
-
-const { modals, openModal } = useModals();
-
-const taskbar = computed(() => modals.value.filter((modal) => modal.taskbar));
+import { ref, computed, onMounted, onBeforeUnmount } from "vue";
+import { useModalStore } from "@/composables/useModals";
 
 export default {
   setup() {
+    const modalStore = useModalStore();
+    const { openModal, closeModal } = modalStore;
+
+    const taskbar = computed(() =>
+      modalStore.modals.filter((modal) => modal.taskbar)
+    );
+
     const showStartMenu = ref(false);
 
     const toggleStartMenu = () => {
@@ -69,6 +75,8 @@ export default {
       handleStartButtonClick,
       taskbar,
       openModal,
+      closeModal,
+      modalStore,
     };
   },
 };
@@ -89,7 +97,7 @@ export default {
   bottom: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Ensures Start on the left, Timer on the right */
+  justify-content: space-between;
   overflow: hidden;
 
   .toolbar-item {
@@ -118,11 +126,11 @@ export default {
 }
 
 .open-tabs {
-  flex-grow: 1; /* Takes up remaining space between Start button and Timer */
+  flex-grow: 1;
   display: flex;
   align-items: center;
   margin-left: 4px;
-  overflow-x: auto; /* Allows scrolling if there are too many tabs */
+  overflow-x: auto;
 }
 
 .tab {
@@ -142,6 +150,12 @@ export default {
     border-bottom: 1px solid $border-light !important;
     border-right: 1px solid $border-light !important;
   }
+}
+
+.close-tab {
+  margin-left: 4px;
+  cursor: pointer;
+  color: red; /* Close tab icon color */
 }
 
 .tab-icon {
