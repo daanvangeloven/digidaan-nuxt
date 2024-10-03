@@ -12,13 +12,13 @@
           @click="minimizeModal(id)"
           class="control-button w95-button-border"
         >
-          -
+          —
         </button>
         <button
           @click="closeModal(id)"
           class="control-button close-button w95-button-border"
         >
-          X
+          ✖
         </button>
       </div>
     </div>
@@ -30,9 +30,7 @@
 
 <script lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
-import { useModals } from "@/composables/useModals";
-
-const { closeModal, minimizeModal, modalMoved, bringToFront } = useModals();
+import { useModalStore } from "@/composables/useModals";
 
 export default {
   props: {
@@ -42,11 +40,15 @@ export default {
     },
   },
   setup(props) {
+    const { closeModal, minimizeModal, modalMoved, bringToFront } =
+      useModalStore();
+
     const modal = ref<HTMLElement | null>(null);
     const modalHeader = ref<HTMLElement | null>(null);
     let isDragging = false;
     let offsetX = 0;
     let offsetY = 0;
+    let newPosition = { x: 0, y: 0 };
 
     const onMouseDown = (event: MouseEvent) => {
       if ((event.target as HTMLElement).closest(".control-button")) {
@@ -85,7 +87,7 @@ export default {
         modal.value!.style.left = `${newLeft}px`;
         modal.value!.style.top = `${newTop}px`;
 
-        modalMoved(props.id, newLeft, newTop);
+        newPosition = { x: newLeft, y: newTop };
       }
     };
 
@@ -93,6 +95,10 @@ export default {
       isDragging = false;
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseup", onMouseUp);
+
+      if (newPosition.x !== 0 || newPosition.y !== 0) {
+        modalMoved(props.id, newPosition.x, newPosition.y);
+      }
     };
 
     onMounted(() => {
@@ -171,7 +177,7 @@ export default {
     height: 16px;
     width: 16px;
     letter-spacing: 1px;
-    font-weight: 700;
+    font-weight: bold;
     text-shadow: 0 1px 0 #fff;
   }
 }

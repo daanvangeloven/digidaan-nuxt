@@ -11,4 +11,5 @@ export default defineNuxtConfig({
       },
     },
   },
+  plugins: ["~/plugins/pinia.ts"],
 });

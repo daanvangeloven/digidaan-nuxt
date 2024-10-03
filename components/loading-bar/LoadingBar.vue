@@ -17,7 +17,7 @@ export default {
       if (counter.value === 15) {
         counter.value = 0;
       }
-    }, 1000);
+    }, 300);
   },
 };
 </script>
