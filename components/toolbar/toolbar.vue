@@ -23,7 +23,9 @@
         <span>{{ tab.title }}</span>
       </div>
     </div>
-    <div class="toolbar-timer tab w95-border-inverse toolbar-item">18:34</div>
+    <div class="toolbar-timer tab w95-border-inverse toolbar-item">
+      {{ timeOutput }}
+    </div>
   </div>
 </template>
 
@@ -33,6 +35,13 @@ import { useModalStore } from "@/composables/useModals";
 
 export default {
   setup() {
+    const time = ref(new Date());
+
+    const timeOutput = computed(() => {
+      const hours = time.value.getHours().toString().padStart(2, "0");
+      const minutes = time.value.getMinutes().toString().padStart(2, "0");
+      return `${hours}:${minutes}`;
+    });
     const modalStore = useModalStore();
     const { openModal, closeModal } = modalStore;
 
@@ -64,6 +73,9 @@ export default {
 
     onMounted(() => {
       window.addEventListener("click", handleWindowClick);
+      setInterval(() => {
+        time.value = new Date();
+      }, 1000);
     });
 
     onBeforeUnmount(() => {
@@ -77,6 +89,7 @@ export default {
       openModal,
       closeModal,
       modalStore,
+      timeOutput,
     };
   },
 };

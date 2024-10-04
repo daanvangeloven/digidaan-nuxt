@@ -12,7 +12,7 @@
       "id": "about",
       "title": "About me",
       "icon": "help.png",
-      "content": "ProfileContent",
+      "content": "AboutContent",
       "onDesktop": true,
       "onStartMenu": true
     },
@@ -20,7 +20,7 @@
       "id": "projects",
       "title": "Projects",
       "icon": "projects.png",
-      "content": "ProfileContent",
+      "content": "ProjectContent",
       "onDesktop": true,
       "onStartMenu": true
     },
@@ -28,7 +28,7 @@
       "id": "experience",
       "title": "Experience",
       "icon": "experience.png",
-      "content": "ProfileContent",
+      "content": "ExperienceContent",
       "onDesktop": true,
       "onStartMenu": true
     },
@@ -44,9 +44,49 @@
       "id": "computer",
       "title": "This Computer",
       "icon": "computer.png",
-      "content": "ProfileContent",
+      "content": "ComputerContent",
       "onDesktop": true,
       "onStartMenu": true
+    },
+    {
+      "id": "pvsafe",
+      "title": "PVSafe",
+      "icon": "computer.png",
+      "content": "PVSafeContent",
+      "onDesktop": false,
+      "onStartMenu": false
+    },
+    {
+      "id": "summa",
+      "title": "Summa College",
+      "icon": "computer.png",
+      "content": "SummaContent",
+      "onDesktop": false,
+      "onStartMenu": false
+    },
+    {
+      "id": "pbma",
+      "title": "PBMA",
+      "icon": "computer.png",
+      "content": "PBMAContent",
+      "onDesktop": false,
+      "onStartMenu": false
+    },
+    {
+      "id": "pgt",
+      "title": "PGT Veldhoven",
+      "icon": "computer.png",
+      "content": "PGTContent",
+      "onDesktop": false,
+      "onStartMenu": false
+    },
+    {
+      "id": "wimereux",
+      "title": "Wimereux",
+      "icon": "computer.png",
+      "content": "WimereuxContent",
+      "onDesktop": false,
+      "onStartMenu": false
     }
   ]
 }

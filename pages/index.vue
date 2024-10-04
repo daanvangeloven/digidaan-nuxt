@@ -5,6 +5,7 @@
     <div v-for="modal in modalStore.modals">
       <Modal
         :id="modal.id"
+        :icon="modal.icon"
         :class="{ minimized: modal.minimized }"
         :style="{
           'z-index': modal.zIndex,
@@ -83,6 +84,10 @@ body {
 
 .minimized {
   display: none;
+}
+
+a {
+  color: $link;
 }
 
 .content {
