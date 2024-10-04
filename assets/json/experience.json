@@ -2,33 +2,68 @@
   "experience": [
     {
       "company": "Jumbo Supermarkten.",
-      "job": "Front-end Developer",
+      "title": "Front-end Developer",
       "description": "Working with a team to maintain and expand the Jumbo Extra's app. A project with rapid development and nearly 1.9 million active users",
-      "date": "2024 - present"
+      "date": "dec 2023 - present"
     },
     {
       "company": "Jumbo Supermarkten.",
-      "job": "IAM Developer",
+      "title": "IAM Developer",
       "description": "Collaborate with IAM specialists to mantain and expand the identity infrastructure for over 100.000 employees.",
-      "date": "2023 - 2024"
+      "date": "jan 2023 - dec 2023"
     },
     {
       "company": "Digidaan IT Services.",
-      "job": "Full Stack Developer",
+      "title": "Full Stack Developer",
       "description": "Working independently on a diverse range of IT projects. Both in developing new systems and supporting existing ones.",
-      "date": "2021 - Present"
+      "date": "feb 2021 - Present"
     },
     {
       "company": "Summa College.",
-      "job": "Intern",
+      "title": "Intern",
       "description": "Worked on a new IOT-system to monitor and respond to various climate conditions within Summa College's buildings.",
       "date": "2020 - 2021"
     },
     {
       "company": "ASML Netherlands.",
-      "job": "Intern",
+      "title": "Intern",
       "description": "Helped to maintain and expand the internal information infrastructure.",
       "date": "2019 - 2020"
+    }
+  ],
+  "skills": [
+    {
+      "name": "HTML + CSS"
+    },
+    {
+      "name": "C#"
+    },
+    {
+      "name": "TypeScript"
+    },
+    {
+      "name": "NuxtJS"
+    },
+    {
+      "name": "VueJS"
+    },
+    {
+      "name": "Javascript + jQuery"
+    },
+    {
+      "name": "Bootstrap CSS"
+    },
+    {
+      "name": "Tailwind CSS"
+    },
+    {
+      "name": "ASP.NET Core"
+    },
+    {
+      "name": "SupaBase"
+    },
+    {
+      "name": "Wordpress + WooCommerce"
     }
   ]
 }

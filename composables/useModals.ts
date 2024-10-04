@@ -1,4 +1,3 @@
-// stores/modalStore.ts
 import { defineStore } from "pinia";
 import { ref, markRaw } from "vue";
 import type { Modal } from "~/types/modal";
@@ -20,10 +19,6 @@ export const useModalStore = defineStore("modalStore", () => {
           ...modals.value.map((modal) => modal.zIndex),
           zIndexCounter.value
         );
-
-        activeModal.value = modals.value.reduce((prev, current) =>
-          prev.zIndex > current.zIndex ? prev : current
-        ).id;
 
         modals.value.forEach((modal) => {
           loadComponent(modal.contentName).then((component) => {

@@ -2,7 +2,7 @@
   <div @mousedown="bringToFront(id)" class="modal" ref="modal">
     <div class="modal-header" ref="modalHeader">
       <div class="header-item">
-        <img src="/img/icons/profile.png" class="modal-icon" />
+        <img :src="`/img/icons/${icon}`" class="modal-icon" />
         <div class="title">
           <slot name="header-title"></slot>
         </div>
@@ -35,6 +35,10 @@ import { useModalStore } from "@/composables/useModals";
 export default {
   props: {
     id: {
+      type: String,
+      required: true,
+    },
+    icon: {
       type: String,
       required: true,
     },
@@ -130,13 +134,22 @@ export default {
   position: absolute;
   min-width: 300px;
   min-height: 200px;
-  max-width: 80%;
+  max-height: 80vh;
   background-color: $secondary-background;
   border-top: 2px solid white;
   border-left: 2px solid white;
   border-right: 2px solid #393939;
   border-bottom: 2px solid #393939;
+  overflow: hidden;
   cursor: default;
+}
+
+.modal-content {
+  display: flex;
+  flex-grow: 1;
+  max-height: inherit;
+  overflow-y: scroll;
+  background-color: $secondary-background;
 }
 
 .modal-header {

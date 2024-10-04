@@ -1,0 +1,34 @@
+{
+  "projects": [
+    {
+      "id": "pvsafe",
+      "title": "PVSafe",
+      "image": "pvsafe.png"
+    },
+    {
+      "id": "summa",
+      "title": "Summa College",
+      "image": "cardgame.png"
+    },
+    {
+      "id": "pbma",
+      "title": "PBMA",
+      "image": "excavator.png"
+    },
+    {
+      "id": "pgt",
+      "title": "PGT Veldhoven",
+      "image": "pgt.png"
+    },
+    {
+      "id": "wimereux",
+      "title": "Wimereux",
+      "image": "address_book_home.png"
+    },
+    {
+      "id": "contact",
+      "title": "Your project",
+      "image": "help.png"
+    }
+  ]
+}
