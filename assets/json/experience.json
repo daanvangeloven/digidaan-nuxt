@@ -1,10 +1,16 @@
 {
   "experience": [
     {
+      "company": "SocialDeal.",
+      "title": "Front-end Developer",
+      "description": "Maintaining and expanding the various websites under the SocialDeal umbrella. With over 4 million monthly active users and over 10 million user accounts quality and scalability is crucial.",
+      "date": "nov 2024 - present"
+    },
+    {
       "company": "Jumbo Supermarkten.",
       "title": "Front-end Developer",
       "description": "Working with a team to maintain and expand the Jumbo Extra's app. A project with rapid development and nearly 1.9 million active users",
-      "date": "dec 2023 - present"
+      "date": "dec 2023 - nov 2024"
     },
     {
       "company": "Jumbo Supermarkten.",
