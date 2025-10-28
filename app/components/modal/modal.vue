@@ -103,13 +103,13 @@ onBeforeUnmount(() => {
       </div>
       <div class="flex gap-1 items-center">
         <button
-          class="align-middle bg-w95-gray border-none text-black text-[10px] cursor-pointer h-4 w-4 tracking-wide font-bold shadow-[0_1px_0_#fff] w95-button-border"
+          class="flex items-center justify-center bg-w95-gray text-black text-[10px] cursor-pointer h-4 w-4 tracking-wide font-bold leading-none w95-button-border"
           @click="minimizeModal(id)"
         >
           —
         </button>
         <button
-          class="align-middle bg-w95-gray border-none text-black text-[10px] cursor-pointer h-4 w-4 tracking-wide font-bold shadow-[0_1px_0_#fff] mr-1 w95-button-border"
+          class="flex items-center justify-center bg-w95-gray text-black text-[10px] cursor-pointer h-4 w-4 tracking-wide font-bold leading-none mr-1 w95-button-border -translate-y-px"
           @click="closeModal(id)"
         >
           ✖
