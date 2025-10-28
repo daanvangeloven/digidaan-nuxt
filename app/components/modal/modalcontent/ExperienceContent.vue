@@ -6,21 +6,29 @@ const skills = data.skills
 </script>
 
 <template>
-  <div class="experience-content">
-    <h1>Experience</h1>
-    <div class="job-history">
+  <div class="flex flex-col gap-5 p-5 mb-5 w-full overflow-y-auto items-center">
+    <h1 class="text-5xl font-bold max-[600px]:text-3xl">
+      Experience
+    </h1>
+    <div class="flex flex-col gap-5 w-[85%] border-l border-r border-t border-b border-l-w95-border-light border-r-w95-border-dark border-t-w95-border-light border-b-w95-border-dark max-[600px]:w-full">
       <div
         v-for="(job, index) in experience"
         :key="index"
-        class="job"
+        class="flex flex-col gap-2 p-2 border-b border-b-w95-border-light"
       >
-        <h2>{{ job.title }}</h2>
-        <h3>{{ job.company }}</h3>
+        <h2 class="text-xl font-bold">
+          {{ job.title }}
+        </h2>
+        <h3 class="text-base font-bold">
+          {{ job.company }}
+        </h3>
         <p>{{ job.date }}</p>
         <p>{{ job.description }}</p>
       </div>
     </div>
-    <h1>Skills</h1>
+    <h1 class="text-5xl font-bold max-[600px]:text-3xl">
+      Skills
+    </h1>
     <div class="skills">
       <div
         v-for="(skill, index) in skills"
@@ -32,63 +40,3 @@ const skills = data.skills
     </div>
   </div>
 </template>
-
-<style lang="scss">
-@import "@/assets/style/index";
-
-.experience-content {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-  width: 100%;
-  overflow-y: auto;
-  align-items: center;
-}
-
-h1 {
-  font-size: 50px;
-  font-weight: bold;
-}
-
-.job-history {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 85%;
-
-  border-left: 1px solid $border-light;
-  border-right: 1px solid $border-dark;
-  border-top: 1px solid $border-light;
-  border-bottom: 1px solid $border-dark;
-
-  h2 {
-    font-size: 20px;
-    font-weight: bold;
-  }
-
-  h3 {
-    font-size: 16px;
-    font-weight: bold;
-  }
-}
-
-.job {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 8px;
-  border-bottom: 1px solid $border-light;
-}
-
-@media (max-width: 600px) {
-  h1 {
-    font-size: 30px;
-  }
-
-  .job-history {
-    width: 100%;
-  }
-}
-</style>

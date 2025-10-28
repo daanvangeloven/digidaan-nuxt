@@ -1,54 +1,19 @@
 <template>
-  <div class="profile-content">
-    <div class="header">
+  <div class="p-5 flex flex-col gap-5">
+    <div class="flex gap-5 items-center">
       <img
         src="/img/profile/portrait.png"
         alt="User"
+        class="w-[100px] h-[100px]"
       >
-      <h1 class="title">
-        Hello, I’m Daan van Geloven.
+      <h1 class="text-2xl font-bold">
+        Hello, I'm Daan van Geloven.
       </h1>
     </div>
-    <div class="body">
-      <h3 class="subtitle">
+    <div class="flex flex-col gap-2.5">
+      <h3 class="text-lg font-bold">
         Front-end Developer
       </h3>
     </div>
   </div>
 </template>
-
-<style lang="scss">
-.profile-content {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-
-  .header {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-
-  .header img {
-    width: 100px;
-    height: 100px;
-  }
-
-  .header .title {
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  .body {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .body .subtitle {
-    font-size: 18px;
-    font-weight: bold;
-  }
-}
-</style>

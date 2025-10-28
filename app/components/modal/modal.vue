@@ -85,115 +85,39 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="modal"
-    class="modal"
+    class="absolute min-w-[300px] min-h-[200px] max-h-[80vh] max-w-[1024px] bg-w95-gray border-t-2 border-l-2 border-r-2 border-b-2 border-t-white border-l-white border-r-[#393939] border-b-[#393939] overflow-hidden cursor-default"
     @mousedown="bringToFront(id)"
   >
     <div
       ref="modalHeader"
-      class="modal-header"
+      class="bg-w95-blue text-white h-6 flex flex-row justify-between items-center text-[10px] leading-[1.5] w-full select-none cursor-pointer"
     >
-      <div class="header-item">
+      <div class="flex gap-1 items-center">
         <img
           :src="`/img/icons/${icon}`"
-          class="modal-icon"
+          class="w-4 h-4 ml-1"
         >
-        <div class="title">
+        <div class="ml-1.5">
           <slot name="header-title" />
         </div>
       </div>
-      <div class="header-item">
+      <div class="flex gap-1 items-center">
         <button
-          class="control-button w95-button-border"
+          class="flex items-center justify-center bg-w95-gray text-black text-[10px] cursor-pointer h-4 w-4 tracking-wide font-bold leading-none w95-button-border"
           @click="minimizeModal(id)"
         >
           —
         </button>
         <button
-          class="control-button close-button w95-button-border"
+          class="flex items-center justify-center bg-w95-gray text-black text-[10px] cursor-pointer h-4 w-4 tracking-wide font-bold leading-none mr-1 w95-button-border -translate-y-px"
           @click="closeModal(id)"
         >
           ✖
         </button>
       </div>
     </div>
-    <div class="modal-content">
+    <div class="flex flex-grow max-h-[inherit] overflow-y-auto bg-w95-gray">
       <slot name="modal-content" />
     </div>
   </div>
 </template>
-
-<style lang="scss">
-@import "@/assets/style/index";
-
-.modal {
-  position: absolute;
-  min-width: 300px;
-  min-height: 200px;
-  max-height: 80vh;
-  max-width: 1024px;
-  background-color: $secondary-background;
-  border-top: 2px solid white;
-  border-left: 2px solid white;
-  border-right: 2px solid #393939;
-  border-bottom: 2px solid #393939;
-  overflow: hidden;
-  cursor: default;
-}
-
-.modal-content {
-  display: flex;
-  flex-grow: 1;
-  max-height: inherit;
-  overflow-y: auto;
-  background-color: $secondary-background;
-}
-
-.modal-header {
-  background-color: $dark-blue;
-  color: $text-light;
-  height: 24px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 10px;
-  line-height: 1.5;
-  width: 100%;
-  user-select: none;
-  cursor: pointer;
-
-  .title {
-    margin-left: 6px;
-  }
-}
-
-.header-item {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-
-  .close-button {
-    margin-right: 4px;
-  }
-
-  .control-button {
-    vertical-align: middle;
-    background-color: $secondary-background;
-    border: none;
-    color: $text-dark;
-    font-size: 10px;
-    cursor: pointer;
-    height: 16px;
-    width: 16px;
-    letter-spacing: 1px;
-    font-weight: bold;
-    text-shadow: 0 1px 0 #fff;
-  }
-}
-
-.modal-icon {
-  width: 16px;
-  height: 16px;
-  margin-left: 4px;
-}
-</style>
