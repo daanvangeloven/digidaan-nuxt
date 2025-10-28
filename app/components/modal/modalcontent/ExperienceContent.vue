@@ -1,17 +1,8 @@
-<script lang="ts">
+<script setup lang="ts">
 import data from '@/assets/json/experience.json'
 
-export default {
-  setup() {
-    const experience = data.experience
-    const skills = data.skills
-
-    return {
-      experience,
-      skills,
-    }
-  },
-}
+const experience = data.experience
+const skills = data.skills
 </script>
 
 <template>
@@ -19,7 +10,8 @@ export default {
     <h1>Experience</h1>
     <div class="job-history">
       <div
-        v-for="job in experience"
+        v-for="(job, index) in experience"
+        :key="index"
         class="job"
       >
         <h2>{{ job.title }}</h2>
@@ -31,7 +23,8 @@ export default {
     <h1>Skills</h1>
     <div class="skills">
       <div
-        v-for="skill in skills"
+        v-for="(skill, index) in skills"
+        :key="index"
         class="skill"
       >
         <p>{{ skill.name }}</p>

@@ -75,6 +75,15 @@ export const useModalStore = defineStore('modalStore', () => {
     }
   }
 
+  const bringToFront = (modalId: string) => {
+    const existingModal = modals.value.find(m => m.id === modalId)
+    if (existingModal) {
+      existingModal.zIndex = zIndexCounter.value++
+      activeModal.value = modalId
+      saveModalsToStorage()
+    }
+  }
+
   const openModal = async (modalId: string) => {
     const existingModal = modals.value.find(m => m.id === modalId)
     if (existingModal) {
@@ -108,15 +117,6 @@ export const useModalStore = defineStore('modalStore', () => {
     if (existingModal) {
       existingModal.x = x
       existingModal.y = y
-      saveModalsToStorage()
-    }
-  }
-
-  const bringToFront = (modalId: string) => {
-    const existingModal = modals.value.find(m => m.id === modalId)
-    if (existingModal) {
-      existingModal.zIndex = zIndexCounter.value++
-      activeModal.value = modalId
       saveModalsToStorage()
     }
   }

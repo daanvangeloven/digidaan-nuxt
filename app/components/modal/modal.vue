@@ -1,103 +1,85 @@
-<script lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+<script setup lang="ts">
 import { useModalStore } from '@/composables/useModals'
 
-export default {
-  props: {
-    id: {
-      type: String,
-      required: true,
-    },
-    icon: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props) {
-    const { closeModal, minimizeModal, modalMoved, bringToFront }
-      = useModalStore()
+const props = defineProps<{
+  id: string
+  icon: string
+}>()
 
-    const modal = ref<HTMLElement | null>(null)
-    const modalHeader = ref<HTMLElement | null>(null)
-    let isDragging = false
-    let offsetX = 0
-    let offsetY = 0
-    let newPosition = { x: 0, y: 0 }
+const { closeModal, minimizeModal, modalMoved, bringToFront }
+  = useModalStore()
 
-    const onMouseDown = (event: MouseEvent) => {
-      if ((event.target as HTMLElement).closest('.control-button')) {
-        return
-      }
-      isDragging = true
-      const modalRect = modal.value!.getBoundingClientRect()
-      offsetX = event.clientX - modalRect.left
-      offsetY = event.clientY - modalRect.top
-      document.addEventListener('mousemove', onMouseMove)
-      document.addEventListener('mouseup', onMouseUp)
-    }
+const modal = ref<HTMLElement | null>(null)
+const modalHeader = ref<HTMLElement | null>(null)
+let isDragging = false
+let offsetX = 0
+let offsetY = 0
+let newPosition = { x: 0, y: 0 }
 
-    // Handle mouse movement to move the modal, constrained within viewport
-    const onMouseMove = (event: MouseEvent) => {
-      if (isDragging) {
-        const modalRect = modal.value!.getBoundingClientRect()
-        const viewportWidth = window.innerWidth
-        const viewportHeight = window.innerHeight - 36 // 36px toolbar height
-
-        let newLeft = event.clientX - offsetX
-        let newTop = event.clientY - offsetY
-
-        if (newLeft < 0) {
-          newLeft = 0
-        }
-        else if (newLeft + modalRect.width > viewportWidth) {
-          newLeft = viewportWidth - modalRect.width
-        }
-
-        if (newTop < 0) {
-          newTop = 0
-        }
-        else if (newTop + modalRect.height > viewportHeight) {
-          newTop = viewportHeight - modalRect.height
-        }
-
-        modal.value!.style.left = `${newLeft}px`
-        modal.value!.style.top = `${newTop}px`
-
-        newPosition = { x: newLeft, y: newTop }
-      }
-    }
-
-    const onMouseUp = () => {
-      isDragging = false
-      document.removeEventListener('mousemove', onMouseMove)
-      document.removeEventListener('mouseup', onMouseUp)
-
-      if (newPosition.x !== 0 || newPosition.y !== 0) {
-        modalMoved(props.id, newPosition.x, newPosition.y)
-      }
-    }
-
-    onMounted(() => {
-      if (modalHeader.value) {
-        modalHeader.value.addEventListener('mousedown', onMouseDown)
-      }
-    })
-
-    onBeforeUnmount(() => {
-      if (modalHeader.value) {
-        modalHeader.value.removeEventListener('mousedown', onMouseDown)
-      }
-    })
-
-    return {
-      modal,
-      modalHeader,
-      closeModal,
-      minimizeModal,
-      bringToFront,
-    }
-  },
+function onMouseDown(event: MouseEvent) {
+  if ((event.target as HTMLElement).closest('.control-button')) {
+    return
+  }
+  isDragging = true
+  const modalRect = modal.value!.getBoundingClientRect()
+  offsetX = event.clientX - modalRect.left
+  offsetY = event.clientY - modalRect.top
+  document.addEventListener('mousemove', onMouseMove)
+  document.addEventListener('mouseup', onMouseUp)
 }
+
+// Handle mouse movement to move the modal, constrained within viewport
+function onMouseMove(event: MouseEvent) {
+  if (isDragging) {
+    const modalRect = modal.value!.getBoundingClientRect()
+    const viewportWidth = window.innerWidth
+    const viewportHeight = window.innerHeight - 36 // 36px toolbar height
+
+    let newLeft = event.clientX - offsetX
+    let newTop = event.clientY - offsetY
+
+    if (newLeft < 0) {
+      newLeft = 0
+    }
+    else if (newLeft + modalRect.width > viewportWidth) {
+      newLeft = viewportWidth - modalRect.width
+    }
+
+    if (newTop < 0) {
+      newTop = 0
+    }
+    else if (newTop + modalRect.height > viewportHeight) {
+      newTop = viewportHeight - modalRect.height
+    }
+
+    modal.value!.style.left = `${newLeft}px`
+    modal.value!.style.top = `${newTop}px`
+
+    newPosition = { x: newLeft, y: newTop }
+  }
+}
+
+function onMouseUp() {
+  isDragging = false
+  document.removeEventListener('mousemove', onMouseMove)
+  document.removeEventListener('mouseup', onMouseUp)
+
+  if (newPosition.x !== 0 || newPosition.y !== 0) {
+    modalMoved(props.id, newPosition.x, newPosition.y)
+  }
+}
+
+onMounted(() => {
+  if (modalHeader.value) {
+    modalHeader.value.addEventListener('mousedown', onMouseDown)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (modalHeader.value) {
+    modalHeader.value.removeEventListener('mousedown', onMouseDown)
+  }
+})
 </script>
 
 <template>

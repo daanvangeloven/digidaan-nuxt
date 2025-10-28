@@ -1,67 +1,52 @@
-<script lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+<script setup lang="ts">
 import { useModalStore } from '@/composables/useModals'
 
-export default {
-  setup() {
-    const time = ref(new Date())
+const time = ref(new Date())
 
-    const timeOutput = computed(() => {
-      const hours = time.value.getHours().toString().padStart(2, '0')
-      const minutes = time.value.getMinutes().toString().padStart(2, '0')
-      return `${hours}:${minutes}`
-    })
-    const modalStore = useModalStore()
-    const { openModal, closeModal } = modalStore
+const timeOutput = computed(() => {
+  const hours = time.value.getHours().toString().padStart(2, '0')
+  const minutes = time.value.getMinutes().toString().padStart(2, '0')
+  return `${hours}:${minutes}`
+})
+const modalStore = useModalStore()
+const { openModal } = modalStore
 
-    const taskbar = computed(() =>
-      modalStore.modals.filter(modal => modal.taskbar),
-    )
+const taskbar = computed(() =>
+  modalStore.modals.filter(modal => modal.taskbar),
+)
 
-    const showStartMenu = ref(false)
+const showStartMenu = ref(false)
 
-    const toggleStartMenu = () => {
-      showStartMenu.value = !showStartMenu.value
-      const startButton = document.querySelector('.start-button-inner-text')
-      startButton?.classList.toggle('active')
-    }
-
-    const handleStartButtonClick = (e: Event) => {
-      e.stopPropagation()
-      toggleStartMenu()
-    }
-
-    const handleWindowClick = (e: Event) => {
-      if (
-        showStartMenu.value
-        && !(e.target as HTMLElement).closest('.start-menu')
-      ) {
-        toggleStartMenu()
-      }
-    }
-
-    onMounted(() => {
-      window.addEventListener('click', handleWindowClick)
-      setInterval(() => {
-        time.value = new Date()
-      }, 1000)
-    })
-
-    onBeforeUnmount(() => {
-      window.removeEventListener('click', handleWindowClick)
-    })
-
-    return {
-      showStartMenu,
-      handleStartButtonClick,
-      taskbar,
-      openModal,
-      closeModal,
-      modalStore,
-      timeOutput,
-    }
-  },
+function toggleStartMenu() {
+  showStartMenu.value = !showStartMenu.value
+  const startButton = document.querySelector('.start-button-inner-text')
+  startButton?.classList.toggle('active')
 }
+
+function handleStartButtonClick(e: Event) {
+  e.stopPropagation()
+  toggleStartMenu()
+}
+
+function handleWindowClick(e: Event) {
+  if (
+    showStartMenu.value
+    && !(e.target as HTMLElement).closest('.start-menu')
+  ) {
+    toggleStartMenu()
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('click', handleWindowClick)
+  setInterval(() => {
+    time.value = new Date()
+  }, 1000)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('click', handleWindowClick)
+})
 </script>
 
 <template>

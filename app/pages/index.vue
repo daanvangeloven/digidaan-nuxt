@@ -1,29 +1,19 @@
-<script lang="ts">
+<script setup lang="ts">
 import LoadingBar from '@/components/loading-bar/LoadingBar.vue'
 import { useModalStore } from '@/composables/useModals'
 
-export default {
-  components: {
-    LoadingBar,
-  },
-  setup() {
-    const modalStore = useModalStore()
-    const loading = ref(true)
+const modalStore = useModalStore()
+const loading = ref(true)
 
-    onMounted(() => {
-      loading.value = false
-    })
+onMounted(() => {
+  loading.value = false
+})
 
-    return { modalStore, loading }
+useHead({
+  bodyAttrs: {
+    class: 'reset-body',
   },
-  head() {
-    return {
-      bodyAttrs: {
-        class: 'reset-body',
-      },
-    }
-  },
-}
+})
 </script>
 
 <template>
@@ -36,7 +26,7 @@ export default {
     class="content"
   >
     <DesktopIcons />
-    <div v-for="modal in modalStore.modals">
+    <div v-for="(modal, index) in modalStore.modals" :key="index">
       <Modal
         :id="modal.id"
         :icon="modal.icon"

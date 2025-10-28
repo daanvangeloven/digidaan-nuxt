@@ -1,22 +1,13 @@
-<script lang="ts">
+<script setup lang="ts">
 import data from '@/assets/json/screens.json'
 import { useModalStore } from '@/composables/useModals'
 
-export default {
-  setup() {
-    const { openModal } = useModalStore()
+const { openModal } = useModalStore()
 
-    const screens = data.screens.filter(screen => screen.onDesktop === true)
+const screens = data.screens.filter(screen => screen.onDesktop === true)
 
-    const itemClick = (modalId: string) => {
-      openModal(modalId)
-    }
-
-    return {
-      screens,
-      itemClick,
-    }
-  },
+function itemClick(modalId: string) {
+  openModal(modalId)
 }
 </script>
 

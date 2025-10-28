@@ -1,15 +1,7 @@
-<script lang="ts">
+<script setup lang="ts">
 import { useModalStore } from '@/composables/useModals'
 
-export default {
-  setup() {
-    const { openModal } = useModalStore()
-
-    return {
-      openModal,
-    }
-  },
-}
+const { openModal } = useModalStore()
 </script>
 
 <template>

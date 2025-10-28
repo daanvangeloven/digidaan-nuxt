@@ -1,38 +1,27 @@
-<script lang="ts">
+<script setup lang="ts">
 import data from '@/assets/json/projects.json'
 import { useModalStore } from '@/composables/useModals'
 
-export default {
-  setup() {
-    const { openModal } = useModalStore()
-    const searchInput = ref('')
-    const filter = ref('')
-    const projects = computed(() => {
-      if (filter.value === '') {
-        return data.projects
-      }
-      else {
-        return data.projects.filter(project =>
-          project.title.toLowerCase().includes(filter.value.toLowerCase()),
-        )
-      }
-    })
+const { openModal } = useModalStore()
+const searchInput = ref('')
+const filter = ref('')
+const projects = computed(() => {
+  if (filter.value === '') {
+    return data.projects
+  }
+  else {
+    return data.projects.filter(project =>
+      project.title.toLowerCase().includes(filter.value.toLowerCase()),
+    )
+  }
+})
 
-    const onFilter = () => {
-      filter.value = searchInput.value
-    }
+function onFilter() {
+  filter.value = searchInput.value
+}
 
-    const itemClick = (modalId: string) => {
-      openModal(modalId)
-    }
-
-    return {
-      projects,
-      itemClick,
-      searchInput,
-      onFilter,
-    }
-  },
+function itemClick(modalId: string) {
+  openModal(modalId)
 }
 </script>
 
