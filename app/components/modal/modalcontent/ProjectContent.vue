@@ -4,21 +4,17 @@ import { useModalStore } from '@/composables/useModals'
 
 const { openModal } = useModalStore()
 const searchInput = ref('')
-const filter = ref('')
+
 const projects = computed(() => {
-  if (filter.value === '') {
+  if (searchInput.value === '') {
     return data.projects
   }
   else {
     return data.projects.filter(project =>
-      project.title.toLowerCase().includes(filter.value.toLowerCase()),
+      project.title.toLowerCase().includes(searchInput.value.toLowerCase()),
     )
   }
 })
-
-function onFilter() {
-  filter.value = searchInput.value
-}
 
 function itemClick(modalId: string) {
   openModal(modalId)
@@ -35,20 +31,12 @@ function itemClick(modalId: string) {
     </div>
     <div class="search-row">
       <input
-        v-model="searchInput"
+        :value="searchInput"
         class="w95-border"
         type="text"
         placeholder="Search"
+        @input="event => searchInput = (event.target as HTMLElement)?.value"
       >
-      <button
-        class="w95-button-border"
-        @click="onFilter"
-      >
-        <img
-          src="/img/icons/search_directory.png"
-          class="search-icon w95-search"
-        >
-      </button>
     </div>
     <div class="directory">
       <div
@@ -118,7 +106,7 @@ function itemClick(modalId: string) {
   padding: 20px;
   min-width: 400px;
   max-width: 500px;
-  overflow-y: scroll;
+  overflow-y: auto;
   align-items: center;
   background-color: white;
   margin-top: 10px;

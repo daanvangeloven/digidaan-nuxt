@@ -43,7 +43,7 @@ const skills = data.skills
   padding: 20px;
   margin-bottom: 20px;
   width: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   align-items: center;
 }
 

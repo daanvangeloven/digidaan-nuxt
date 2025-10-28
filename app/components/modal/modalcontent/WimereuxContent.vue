@@ -23,7 +23,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  overflow-y: scroll;
+  overflow-y: auto;
   max-width: 70vw;
 
   img {

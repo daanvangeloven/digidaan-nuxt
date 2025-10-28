@@ -36,7 +36,7 @@
       "id": "contact",
       "title": "Contact",
       "icon": "contact.png",
-      "content": "ProfileContent",
+      "content": "ContactContent",
       "onDesktop": true,
       "onStartMenu": true
     },

@@ -130,6 +130,7 @@ onBeforeUnmount(() => {
   min-width: 300px;
   min-height: 200px;
   max-height: 80vh;
+  max-width: 1024px;
   background-color: $secondary-background;
   border-top: 2px solid white;
   border-left: 2px solid white;
@@ -143,7 +144,7 @@ onBeforeUnmount(() => {
   display: flex;
   flex-grow: 1;
   max-height: inherit;
-  overflow-y: scroll;
+  overflow-y: auto;
   background-color: $secondary-background;
 }
 
