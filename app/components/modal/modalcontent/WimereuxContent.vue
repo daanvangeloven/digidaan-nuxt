@@ -1,9 +1,12 @@
 <template>
   <div class="wimereux-content">
-    <img src="/img/projects/wimereux/wimereux.png" />
+    <img src="/img/projects/wimereux/wimereux.png">
     <h1>Wimereux</h1>
     <p>
-      <a href="http://wimereux.nl" target="_blank">The Wimereux Website</a>
+      <a
+        href="http://wimereux.nl"
+        target="_blank"
+      >The Wimereux Website</a>
       is a website designed to promote and facilitate the rental of a charming
       holiday house located in the town of Wimereux, France. I provided
       end-to-end support encompassing design, development, hosting, email

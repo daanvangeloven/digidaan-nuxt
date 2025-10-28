@@ -18,14 +18,18 @@
         developer.
       </p>
     </div>
-    <hr />
+    <hr>
     <h1>My interests</h1>
     <div class="row">
       <div class="col">
         <h2>Golf</h2>
-        <img class="interest-img" src="/img/about/golf.png" alt="Golf" />
+        <img
+          class="interest-img"
+          src="/img/about/golf.png"
+          alt="Golf"
+        >
         Since I first swung a club in september 2022 I have been infatuated with
-        the game of golf. <br />
+        the game of golf. <br>
         You can often catch me on the course or practicing away. Competing as
         much as possible and always trying to improve my game.
       </div>
@@ -35,7 +39,7 @@
           class="interest-img"
           src="/img/about/coffee.png"
           alt="Coffee Machine"
-        />
+        >
         A hobby of mine is perfecting my Espresso abilities. I'm currently
         rocking a Gaggia Classic Pro with tons of upgradres (9 bar springs, VST
         Baskets, Bottomless PF etc...) and a Smart Grinder Pro. I'm also always
@@ -48,7 +52,7 @@
           class="interest-img"
           src="/img/about/solder.png"
           alt="Soldering Iron"
-        />
+        >
         On occasion I love to tinker on small hobby projects. For example
         recently I made a sim racing handbrake from an old potentiometer pedal
         and an arduino nano. Or like the time when my mouse scroll wheel started

@@ -1,3 +1,27 @@
+<script lang="ts">
+import data from '@/assets/json/screens.json'
+import { useModalStore } from '@/composables/useModals'
+
+export default {
+  setup() {
+    const { openModal } = useModalStore()
+
+    const itemClick = (modalId: any) => {
+      openModal(modalId)
+    }
+
+    const screens = data.screens.filter(
+      screen => screen.onStartMenu === true,
+    )
+
+    return {
+      screens,
+      itemClick,
+    }
+  },
+}
+</script>
+
 <template>
   <div class="start-menu">
     <div class="menu-title sideways">
@@ -5,41 +29,22 @@
     </div>
     <div class="start-list">
       <div
-        class="start-item"
         v-for="item in screens"
-        @click="itemClick(item.id)"
         :key="item.id"
+        class="start-item"
+        @click="itemClick(item.id)"
       >
-        <img :src="`/img/icons/${item.icon}`" class="start-icon" />
+        <img
+          :src="`/img/icons/${item.icon}`"
+          class="start-icon"
+        >
 
         {{ item.title }}
       </div>
     </div>
   </div>
 </template>
-<script lang="ts">
-import data from "@/assets/json/screens.json";
-import { useModalStore } from "@/composables/useModals";
 
-export default {
-  setup() {
-    const { openModal } = useModalStore();
-
-    const itemClick = (modalId: any) => {
-      openModal(modalId);
-    };
-
-    const screens = data.screens.filter(
-      (screen) => screen.onStartMenu === true
-    );
-
-    return {
-      screens,
-      itemClick,
-    };
-  },
-};
-</script>
 <style lang="scss">
 @import "@/assets/style/index";
 

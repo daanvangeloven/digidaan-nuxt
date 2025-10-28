@@ -1,3 +1,41 @@
+<script lang="ts">
+import data from '@/assets/json/projects.json'
+import { useModalStore } from '@/composables/useModals'
+
+export default {
+  setup() {
+    const { openModal } = useModalStore()
+    const searchInput = ref('')
+    const filter = ref('')
+    const projects = computed(() => {
+      if (filter.value === '') {
+        return data.projects
+      }
+      else {
+        return data.projects.filter(project =>
+          project.title.toLowerCase().includes(filter.value.toLowerCase()),
+        )
+      }
+    })
+
+    const onFilter = () => {
+      filter.value = searchInput.value
+    }
+
+    const itemClick = (modalId: string) => {
+      openModal(modalId)
+    }
+
+    return {
+      projects,
+      itemClick,
+      searchInput,
+      onFilter,
+    }
+  },
+}
+</script>
+
 <template>
   <div class="project-content">
     <div class="util-row">
@@ -8,68 +46,34 @@
     </div>
     <div class="search-row">
       <input
-        class="w95-border"
         v-model="searchInput"
+        class="w95-border"
         type="text"
         placeholder="Search"
-      />
-      <button @click="onFilter" class="w95-button-border">
+      >
+      <button
+        class="w95-button-border"
+        @click="onFilter"
+      >
         <img
           src="/img/icons/search_directory.png"
           class="search-icon w95-search"
-        />
+        >
       </button>
     </div>
     <div class="directory">
       <div
-        class="project"
-        @click="itemClick(project.id)"
         v-for="project in projects"
         :key="project.id"
+        class="project"
+        @click="itemClick(project.id)"
       >
-        <img :src="`/img/icons/${project.image}`" />
+        <img :src="`/img/icons/${project.image}`">
         <span class="project-title">{{ project.title }}</span>
       </div>
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import data from "@/assets/json/projects.json";
-import { useModalStore } from "@/composables/useModals";
-
-export default {
-  setup() {
-    const { openModal } = useModalStore();
-    const searchInput = ref("");
-    const filter = ref("");
-    const projects = computed(() => {
-      if (filter.value === "") {
-        return data.projects;
-      } else {
-        return data.projects.filter((project) =>
-          project.title.toLowerCase().includes(filter.value.toLowerCase())
-        );
-      }
-    });
-
-    const onFilter = () => {
-      filter.value = searchInput.value;
-    };
-
-    const itemClick = (modalId: string) => {
-      openModal(modalId);
-    };
-
-    return {
-      projects,
-      itemClick,
-      searchInput,
-      onFilter,
-    };
-  },
-};
-</script>
 
 <style lang="scss">
 @import "@/assets/style/index";

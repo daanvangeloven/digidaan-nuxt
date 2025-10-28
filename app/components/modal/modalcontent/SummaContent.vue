@@ -25,7 +25,10 @@
 
     <h2>The Digital Cardgame</h2>
     <h3>Step 1. Authentication</h3>
-    <img src="/img/projects/summa/kaartspel-login.png" alt="login screen" />
+    <img
+      src="/img/projects/summa/kaartspel-login.png"
+      alt="login screen"
+    >
     <p>
       The Summa College also sells the rights of the card game to other
       agencies. It must therefore be possible for other agencies to gain access
@@ -36,7 +39,10 @@
     </p>
 
     <h3>Step 2. Identify Impediments</h3>
-    <img src="/img/projects/summa/belemmeringen.png" alt="impediments screen" />
+    <img
+      src="/img/projects/summa/belemmeringen.png"
+      alt="impediments screen"
+    >
     <p>
       The students get to see each impediment once. They can indicate whether or
       not this impediment applies. If an impediment roughly fits but not quite,
@@ -44,7 +50,10 @@
     </p>
 
     <h3>Step 3. Solution Coupling</h3>
-    <img src="/img/projects/summa/oplossing-1.png" alt="impediments screen" />
+    <img
+      src="/img/projects/summa/oplossing-1.png"
+      alt="impediments screen"
+    >
     <p>
       After the impediments have been determined, the students can identify
       possible solutions. The card game contains many solutions and not all of
@@ -61,10 +70,16 @@
       specific obstacle are placed at the top. The further down you go, the less
       relevant the solutions become.
     </p>
-    <img src="/img/projects/summa/oplossing-2.png" alt="impediments screen 2" />
+    <img
+      src="/img/projects/summa/oplossing-2.png"
+      alt="impediments screen 2"
+    >
 
     <h3>Step 4. Couple Executors</h3>
-    <img src="/img/projects/summa/uitvoerders.png" alt="executors screen" />
+    <img
+      src="/img/projects/summa/uitvoerders.png"
+      alt="executors screen"
+    >
     <p>
       As a final step, the executors are linked to the solutions. This is a
       similiar method as the solutions. The cards are sorted by relevance and

@@ -1,0 +1,28 @@
+{
+  // Enable format on save
+  "editor.formatOnSave": false,
+
+  // Enable ESLint auto-fix on save
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+
+  // Disable default formatters in favor of ESLint
+  "prettier.enable": false,
+  "editor.defaultFormatter": null,
+
+  // ESLint settings
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml"
+  ]
+}

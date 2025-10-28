@@ -17,7 +17,10 @@
 
     <h2>PVSafe Website</h2>
 
-    <img src="/img/projects/pvsafe/pvsafe-homepage.png" alt="PVSafe homepage" />
+    <img
+      src="/img/projects/pvsafe/pvsafe-homepage.png"
+      alt="PVSafe homepage"
+    >
 
     <p>
       The PVSafe website is made with <span class="bold">wordpress</span>. I had
@@ -36,7 +39,10 @@
 
     <h2>My PVSafe</h2>
 
-    <img src="/img/projects/pvsafe/mijn-pvsafe.png" alt="My PVSafe" />
+    <img
+      src="/img/projects/pvsafe/mijn-pvsafe.png"
+      alt="My PVSafe"
+    >
     <p>
       My PVSafe is developed with <span class="bold">ASP.NET Core MVC</span>.
     </p>

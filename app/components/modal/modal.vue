@@ -1,36 +1,6 @@
-<template>
-  <div @mousedown="bringToFront(id)" class="modal" ref="modal">
-    <div class="modal-header" ref="modalHeader">
-      <div class="header-item">
-        <img :src="`/img/icons/${icon}`" class="modal-icon" />
-        <div class="title">
-          <slot name="header-title"></slot>
-        </div>
-      </div>
-      <div class="header-item">
-        <button
-          @click="minimizeModal(id)"
-          class="control-button w95-button-border"
-        >
-          —
-        </button>
-        <button
-          @click="closeModal(id)"
-          class="control-button close-button w95-button-border"
-        >
-          ✖
-        </button>
-      </div>
-    </div>
-    <div class="modal-content">
-      <slot name="modal-content"> </slot>
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
-import { ref, onMounted, onBeforeUnmount } from "vue";
-import { useModalStore } from "@/composables/useModals";
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { useModalStore } from '@/composables/useModals'
 
 export default {
   props: {
@@ -44,78 +14,80 @@ export default {
     },
   },
   setup(props) {
-    const { closeModal, minimizeModal, modalMoved, bringToFront } =
-      useModalStore();
+    const { closeModal, minimizeModal, modalMoved, bringToFront }
+      = useModalStore()
 
-    const modal = ref<HTMLElement | null>(null);
-    const modalHeader = ref<HTMLElement | null>(null);
-    let isDragging = false;
-    let offsetX = 0;
-    let offsetY = 0;
-    let newPosition = { x: 0, y: 0 };
+    const modal = ref<HTMLElement | null>(null)
+    const modalHeader = ref<HTMLElement | null>(null)
+    let isDragging = false
+    let offsetX = 0
+    let offsetY = 0
+    let newPosition = { x: 0, y: 0 }
 
     const onMouseDown = (event: MouseEvent) => {
-      if ((event.target as HTMLElement).closest(".control-button")) {
-        return;
+      if ((event.target as HTMLElement).closest('.control-button')) {
+        return
       }
-      isDragging = true;
-      const modalRect = modal.value!.getBoundingClientRect();
-      offsetX = event.clientX - modalRect.left;
-      offsetY = event.clientY - modalRect.top;
-      document.addEventListener("mousemove", onMouseMove);
-      document.addEventListener("mouseup", onMouseUp);
-    };
+      isDragging = true
+      const modalRect = modal.value!.getBoundingClientRect()
+      offsetX = event.clientX - modalRect.left
+      offsetY = event.clientY - modalRect.top
+      document.addEventListener('mousemove', onMouseMove)
+      document.addEventListener('mouseup', onMouseUp)
+    }
 
     // Handle mouse movement to move the modal, constrained within viewport
     const onMouseMove = (event: MouseEvent) => {
       if (isDragging) {
-        const modalRect = modal.value!.getBoundingClientRect();
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight - 36; // 36px toolbar height
+        const modalRect = modal.value!.getBoundingClientRect()
+        const viewportWidth = window.innerWidth
+        const viewportHeight = window.innerHeight - 36 // 36px toolbar height
 
-        let newLeft = event.clientX - offsetX;
-        let newTop = event.clientY - offsetY;
+        let newLeft = event.clientX - offsetX
+        let newTop = event.clientY - offsetY
 
         if (newLeft < 0) {
-          newLeft = 0;
-        } else if (newLeft + modalRect.width > viewportWidth) {
-          newLeft = viewportWidth - modalRect.width;
+          newLeft = 0
+        }
+        else if (newLeft + modalRect.width > viewportWidth) {
+          newLeft = viewportWidth - modalRect.width
         }
 
         if (newTop < 0) {
-          newTop = 0;
-        } else if (newTop + modalRect.height > viewportHeight) {
-          newTop = viewportHeight - modalRect.height;
+          newTop = 0
+        }
+        else if (newTop + modalRect.height > viewportHeight) {
+          newTop = viewportHeight - modalRect.height
         }
 
-        modal.value!.style.left = `${newLeft}px`;
-        modal.value!.style.top = `${newTop}px`;
+        modal.value!.style.left = `${newLeft}px`
+        modal.value!.style.top = `${newTop}px`
 
-        newPosition = { x: newLeft, y: newTop };
+        newPosition = { x: newLeft, y: newTop }
       }
-    };
+    }
 
     const onMouseUp = () => {
-      isDragging = false;
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseup", onMouseUp);
+      isDragging = false
+      document.removeEventListener('mousemove', onMouseMove)
+      document.removeEventListener('mouseup', onMouseUp)
 
       if (newPosition.x !== 0 || newPosition.y !== 0) {
-        modalMoved(props.id, newPosition.x, newPosition.y);
+        modalMoved(props.id, newPosition.x, newPosition.y)
       }
-    };
+    }
 
     onMounted(() => {
       if (modalHeader.value) {
-        modalHeader.value.addEventListener("mousedown", onMouseDown);
+        modalHeader.value.addEventListener('mousedown', onMouseDown)
       }
-    });
+    })
 
     onBeforeUnmount(() => {
       if (modalHeader.value) {
-        modalHeader.value.removeEventListener("mousedown", onMouseDown);
+        modalHeader.value.removeEventListener('mousedown', onMouseDown)
       }
-    });
+    })
 
     return {
       modal,
@@ -123,10 +95,51 @@ export default {
       closeModal,
       minimizeModal,
       bringToFront,
-    };
+    }
   },
-};
+}
 </script>
+
+<template>
+  <div
+    ref="modal"
+    class="modal"
+    @mousedown="bringToFront(id)"
+  >
+    <div
+      ref="modalHeader"
+      class="modal-header"
+    >
+      <div class="header-item">
+        <img
+          :src="`/img/icons/${icon}`"
+          class="modal-icon"
+        >
+        <div class="title">
+          <slot name="header-title" />
+        </div>
+      </div>
+      <div class="header-item">
+        <button
+          class="control-button w95-button-border"
+          @click="minimizeModal(id)"
+        >
+          —
+        </button>
+        <button
+          class="control-button close-button w95-button-border"
+          @click="closeModal(id)"
+        >
+          ✖
+        </button>
+      </div>
+    </div>
+    <div class="modal-content">
+      <slot name="modal-content" />
+    </div>
+  </div>
+</template>
+
 <style lang="scss">
 @import "@/assets/style/index";
 

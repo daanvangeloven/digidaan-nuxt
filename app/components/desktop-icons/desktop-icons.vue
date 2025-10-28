@@ -1,38 +1,42 @@
+<script lang="ts">
+import data from '@/assets/json/screens.json'
+import { useModalStore } from '@/composables/useModals'
+
+export default {
+  setup() {
+    const { openModal } = useModalStore()
+
+    const screens = data.screens.filter(screen => screen.onDesktop === true)
+
+    const itemClick = (modalId: string) => {
+      openModal(modalId)
+    }
+
+    return {
+      screens,
+      itemClick,
+    }
+  },
+}
+</script>
+
 <template>
   <div class="desktop-icons">
     <div
       v-for="item in screens"
       :key="item.id"
-      @click="itemClick(item.id)"
       class="desktop-icon"
+      @click="itemClick(item.id)"
     >
-      <img :src="`/img/icons/${item.icon}`" alt="icon" class="icon-img" />
+      <img
+        :src="`/img/icons/${item.icon}`"
+        alt="icon"
+        class="icon-img"
+      >
       <span>{{ item.title }} </span>
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import data from "@/assets/json/screens.json";
-import { useModalStore } from "@/composables/useModals";
-
-export default {
-  setup() {
-    const { openModal } = useModalStore();
-
-    const screens = data.screens.filter((screen) => screen.onDesktop === true);
-
-    const itemClick = (modalId: string) => {
-      openModal(modalId);
-    };
-
-    return {
-      screens,
-      itemClick,
-    };
-  },
-};
-</script>
 
 <style lang="scss">
 @import "@/assets/style/index";

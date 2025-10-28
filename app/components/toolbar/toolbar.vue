@@ -1,86 +1,55 @@
-<template>
-  <start-menu class="start-menu" v-if="showStartMenu"> </start-menu>
-  <div class="toolbar">
-    <div class="toolbar-start toolbar-item">
-      <span
-        @click="handleStartButtonClick($event)"
-        class="start-button-inner-text tab w95-button-border"
-      >
-        <img class="tab-icon" src="/img/w95-icon.png" />
-        <span>Start</span>
-      </span>
-    </div>
-
-    <div class="open-tabs">
-      <div
-        @click="openModal(tab.id)"
-        v-for="tab in taskbar"
-        :key="tab.id"
-        class="tab w95-button-border toolbar-item"
-        :class="{ active: tab.id === modalStore.activeModal }"
-      >
-        <img class="tab-icon" :src="`img/icons/${tab.icon}`" />
-        <span>{{ tab.title }}</span>
-      </div>
-    </div>
-    <div class="toolbar-timer tab w95-border-inverse toolbar-item">
-      {{ timeOutput }}
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount } from "vue";
-import { useModalStore } from "@/composables/useModals";
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useModalStore } from '@/composables/useModals'
 
 export default {
   setup() {
-    const time = ref(new Date());
+    const time = ref(new Date())
 
     const timeOutput = computed(() => {
-      const hours = time.value.getHours().toString().padStart(2, "0");
-      const minutes = time.value.getMinutes().toString().padStart(2, "0");
-      return `${hours}:${minutes}`;
-    });
-    const modalStore = useModalStore();
-    const { openModal, closeModal } = modalStore;
+      const hours = time.value.getHours().toString().padStart(2, '0')
+      const minutes = time.value.getMinutes().toString().padStart(2, '0')
+      return `${hours}:${minutes}`
+    })
+    const modalStore = useModalStore()
+    const { openModal, closeModal } = modalStore
 
     const taskbar = computed(() =>
-      modalStore.modals.filter((modal) => modal.taskbar)
-    );
+      modalStore.modals.filter(modal => modal.taskbar),
+    )
 
-    const showStartMenu = ref(false);
+    const showStartMenu = ref(false)
 
     const toggleStartMenu = () => {
-      showStartMenu.value = !showStartMenu.value;
-      const startButton = document.querySelector(".start-button-inner-text");
-      startButton?.classList.toggle("active");
-    };
+      showStartMenu.value = !showStartMenu.value
+      const startButton = document.querySelector('.start-button-inner-text')
+      startButton?.classList.toggle('active')
+    }
 
     const handleStartButtonClick = (e: Event) => {
-      e.stopPropagation();
-      toggleStartMenu();
-    };
+      e.stopPropagation()
+      toggleStartMenu()
+    }
 
     const handleWindowClick = (e: Event) => {
       if (
-        showStartMenu.value &&
-        !(e.target as HTMLElement).closest(".start-menu")
+        showStartMenu.value
+        && !(e.target as HTMLElement).closest('.start-menu')
       ) {
-        toggleStartMenu();
+        toggleStartMenu()
       }
-    };
+    }
 
     onMounted(() => {
-      window.addEventListener("click", handleWindowClick);
+      window.addEventListener('click', handleWindowClick)
       setInterval(() => {
-        time.value = new Date();
-      }, 1000);
-    });
+        time.value = new Date()
+      }, 1000)
+    })
 
     onBeforeUnmount(() => {
-      window.removeEventListener("click", handleWindowClick);
-    });
+      window.removeEventListener('click', handleWindowClick)
+    })
 
     return {
       showStartMenu,
@@ -90,10 +59,50 @@ export default {
       closeModal,
       modalStore,
       timeOutput,
-    };
+    }
   },
-};
+}
 </script>
+
+<template>
+  <start-menu
+    v-if="showStartMenu"
+    class="start-menu"
+  />
+  <div class="toolbar">
+    <div class="toolbar-start toolbar-item">
+      <span
+        class="start-button-inner-text tab w95-button-border"
+        @click="handleStartButtonClick($event)"
+      >
+        <img
+          class="tab-icon"
+          src="/img/w95-icon.png"
+        >
+        <span>Start</span>
+      </span>
+    </div>
+
+    <div class="open-tabs">
+      <div
+        v-for="tab in taskbar"
+        :key="tab.id"
+        class="tab w95-button-border toolbar-item"
+        :class="{ active: tab.id === modalStore.activeModal }"
+        @click="openModal(tab.id)"
+      >
+        <img
+          class="tab-icon"
+          :src="`img/icons/${tab.icon}`"
+        >
+        <span>{{ tab.title }}</span>
+      </div>
+    </div>
+    <div class="toolbar-timer tab w95-border-inverse toolbar-item">
+      {{ timeOutput }}
+    </div>
+  </div>
+</template>
 
 <style lang="scss">
 @import "@/assets/style/index";

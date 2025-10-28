@@ -1,6 +1,40 @@
+<script lang="ts">
+import LoadingBar from '@/components/loading-bar/LoadingBar.vue'
+import { useModalStore } from '@/composables/useModals'
+
+export default {
+  components: {
+    LoadingBar,
+  },
+  setup() {
+    const modalStore = useModalStore()
+    const loading = ref(true)
+
+    onMounted(() => {
+      loading.value = false
+    })
+
+    return { modalStore, loading }
+  },
+  head() {
+    return {
+      bodyAttrs: {
+        class: 'reset-body',
+      },
+    }
+  },
+}
+</script>
+
 <template>
-  <LoadingBar v-if="loading" class="loading"></LoadingBar>
-  <div v-else class="content">
+  <LoadingBar
+    v-if="loading"
+    class="loading"
+  />
+  <div
+    v-else
+    class="content"
+  >
     <DesktopIcons />
     <div v-for="modal in modalStore.modals">
       <Modal
@@ -9,47 +43,22 @@
         :class="{ minimized: modal.minimized }"
         :style="{
           'z-index': modal.zIndex,
-          left: `${modal.x}px`,
-          top: `${modal.y}px`,
+          'left': `${modal.x}px`,
+          'top': `${modal.y}px`,
         }"
       >
         <template #header-title>
           <span>{{ modal.title }}</span>
         </template>
-        <template #modal-content><component :is="modal.content" /> </template>
+        <template #modal-content>
+          <component :is="modal.content" />
+        </template>
       </Modal>
     </div>
     <Toolbar />
   </div>
 </template>
 
-<script lang="ts">
-import LoadingBar from "@/components/loading-bar/LoadingBar.vue";
-import { useModalStore } from "@/composables/useModals";
-
-export default {
-  components: {
-    LoadingBar,
-  },
-  head() {
-    return {
-      bodyAttrs: {
-        class: "reset-body",
-      },
-    };
-  },
-  setup() {
-    const modalStore = useModalStore();
-    const loading = ref(true);
-
-    onMounted(() => {
-      loading.value = false;
-    });
-
-    return { modalStore, loading };
-  },
-};
-</script>
 <style lang="scss">
 @import "@/assets/style/index";
 

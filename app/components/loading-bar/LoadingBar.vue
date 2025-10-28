@@ -1,29 +1,24 @@
+<script setup lang="ts">
+const counter = ref(1)
+
+onMounted(() => {
+  setInterval(() => {
+    counter.value++
+    if (counter.value === 15) {
+      counter.value = 0
+    }
+  }, 300)
+})
+</script>
+
 <template>
   <div class="loading-bar">
-    <span v-for="n in counter" class="loading-block"></span>
+    <span v-for="n in counter" :key="n" class="loading-block" />
   </div>
 </template>
 
-<script>
-const counter = ref(1);
-
-export default {
-  setup() {
-    return { counter };
-  },
-  mounted() {
-    const interval = setInterval(() => {
-      counter.value++;
-      if (counter.value === 15) {
-        counter.value = 0;
-      }
-    }, 300);
-  },
-};
-</script>
-
 <style lang="scss">
-@import "@/assets/style/index";
+@import '@/assets/style/index';
 
 .loading-bar {
   position: absolute;

@@ -8,8 +8,7 @@
           href="https://www.linkedin.com/in/daan-van-geloven-644794170/"
           target="_blank"
           class="name"
-          >Daan van Geloven</a
-        >
+        >Daan van Geloven</a>
       </p>
       <h3>Technologies used:</h3>
       <ul>
@@ -21,17 +20,13 @@
       </ul>
     </div>
     <div class="computer-info">
-      <img src="/img/w95-backgroundlogo.png" alt="DigidaanOS Logo" />
+      <img src="/img/w95-backgroundlogo.png" alt="DigidaanOS Logo">
       <a
         href="https://www.linkedin.com/in/daan-van-geloven-644794170/"
         target="_blank"
         class="imglink linkedin w95-button-border"
       >
-        <img
-          src="/img/linkedin.png"
-          class=""
-          alt="linkedin Logo w95-button-border"
-        />
+        <img src="/img/linkedin.png" class="" alt="linkedin Logo w95-button-border">
         My Linkedin
       </a>
       <a
@@ -39,7 +34,7 @@
         target="_blank"
         class="imglink github Logo w95-button-border"
       >
-        <img src="/img/github.png" alt="Github" />
+        <img src="/img/github.png" alt="Github">
         This page's source code
       </a>
     </div>
@@ -47,7 +42,7 @@
 </template>
 
 <style lang="scss">
-@import "@/assets/style/index";
+@import '@/assets/style/index';
 
 $linkedin: #0077b5;
 $github: #333;

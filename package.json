@@ -1,20 +1,26 @@
 {
   "name": "digidaan-nuxt",
+  "type": "module",
+  "private": true,
   "description": "Digidaan website written in Nuxt",
   "author": "Daan van Geloven ",
-  "private": true,
-  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "nuxt": "latest",
     "pinia": "^2.2.4",
     "sass": "^1.63.6",
     "vue": "latest"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.1.0",
+    "eslint": "^9.38.0"
   }
 }

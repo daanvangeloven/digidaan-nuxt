@@ -1,9 +1,12 @@
 <template>
   <div class="pgt-content">
-    <img src="/img/projects/pgt/pgt.png" />
+    <img src="/img/projects/pgt/pgt.png">
     <h1>PGT Veldhoven</h1>
     <p>
-      The <a href="https://pgtveldhoven.nl" target="_blank">PGT Veldhoven</a> is
+      The <a
+        href="https://pgtveldhoven.nl"
+        target="_blank"
+      >PGT Veldhoven</a> is
       a website I developed for a therapist in Veldhoven. She came to me with a
       request for a website but didn't have any specific requirements. Together
       we came up with the name PGT Veldhoven and started working on the website
