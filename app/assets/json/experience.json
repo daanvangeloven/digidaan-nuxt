@@ -42,9 +42,6 @@
       "name": "HTML + CSS"
     },
     {
-      "name": "C#"
-    },
-    {
       "name": "TypeScript"
     },
     {
@@ -54,22 +51,7 @@
       "name": "VueJS"
     },
     {
-      "name": "Javascript + jQuery"
-    },
-    {
-      "name": "Bootstrap CSS"
-    },
-    {
       "name": "Tailwind CSS"
-    },
-    {
-      "name": "ASP.NET Core"
-    },
-    {
-      "name": "SupaBase"
-    },
-    {
-      "name": "Wordpress + WooCommerce"
     }
   ]
 }

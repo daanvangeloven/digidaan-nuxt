@@ -5,10 +5,12 @@ const { openModal } = useModalStore()
 </script>
 
 <template>
-  <div class="pbma-content">
-    <img src="/img/projects/pbma/pbma.png">
-    <h1>PBMA</h1>
-    <p>
+  <div class="p-5 mb-5 flex flex-col gap-5 overflow-y-auto max-w-[70vw] max-md:max-w-full">
+    <img src="/img/projects/pbma/pbma.png" class="flex self-center w-[80%] h-auto max-md:w-full">
+    <h1 class="text-2xl font-bold">
+      PBMA
+    </h1>
+    <p class="text-sm">
       <a
         href="http://pbmadvies.com"
         target="_blank"
@@ -16,7 +18,7 @@ const { openModal } = useModalStore()
       is a Soil and Environmental Advisory agency. I had previously developed
       the
       <a
-        class="wimereux-link"
+        class="cursor-pointer underline"
         @click="openModal('wimereux')"
       >Wimereux website</a>
       for the same client. Because of his positive experience with me, he
@@ -25,45 +27,3 @@ const { openModal } = useModalStore()
     </p>
   </div>
 </template>
-
-<style lang="scss">
-.pbma-content {
-  padding: 20px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  overflow-y: auto;
-  max-width: 70vw;
-
-  img {
-    display: flex;
-    align-self: center;
-    width: 80%;
-    height: auto;
-  }
-
-  h1 {
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  p {
-    font-size: 14px;
-  }
-
-  .wimereux-link {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-}
-
-@media (max-width: 768px) {
-  .pbma-content {
-    max-width: 100%;
-  }
-  .pbma-content img {
-    width: 100%;
-  }
-}
-</style>

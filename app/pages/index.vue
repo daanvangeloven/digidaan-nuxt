@@ -49,9 +49,7 @@ useHead({
   </div>
 </template>
 
-<style lang="scss">
-@import "@/assets/style/index";
-
+<style>
 @font-face {
   font-family: "Windows 95";
   src: url("../assets/fonts/w-95-sans-serif.woff") format("woff");
@@ -73,7 +71,7 @@ body {
 }
 
 body {
-  background-color: $base-background;
+  background-color: #008081;
   background-image: url("/img/w95-backgroundlogo.png");
   background-repeat: no-repeat;
   background-size: 30%;
@@ -85,8 +83,8 @@ body {
   display: none;
 }
 
-a {
-  color: $link;
+a{
+  color: #007bff;
 }
 
 .content {

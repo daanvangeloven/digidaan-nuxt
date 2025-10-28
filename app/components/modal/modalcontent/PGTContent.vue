@@ -1,8 +1,10 @@
 <template>
-  <div class="pgt-content">
-    <img src="/img/projects/pgt/pgt.png">
-    <h1>PGT Veldhoven</h1>
-    <p>
+  <div class="p-5 mb-5 flex flex-col gap-5 overflow-y-auto max-w-[70vw] max-md:max-w-full">
+    <img src="/img/projects/pgt/pgt.png" class="flex self-center w-[80%] h-auto max-md:w-full">
+    <h1 class="text-2xl font-bold">
+      PGT Veldhoven
+    </h1>
+    <p class="text-sm">
       The <a
         href="https://pgtveldhoven.nl"
         target="_blank"
@@ -14,40 +16,3 @@
     </p>
   </div>
 </template>
-
-<style lang="scss">
-.pgt-content {
-  padding: 20px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  overflow-y: auto;
-  max-width: 70vw;
-
-  img {
-    display: flex;
-    align-self: center;
-    width: 80%;
-    height: auto;
-  }
-
-  h1 {
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  p {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 768px) {
-  .pgt-content {
-    max-width: 100%;
-  }
-  .pgt-content img {
-    width: 100%;
-  }
-}
-</style>

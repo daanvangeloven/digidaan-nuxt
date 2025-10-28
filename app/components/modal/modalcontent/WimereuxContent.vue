@@ -1,8 +1,10 @@
 <template>
-  <div class="wimereux-content">
-    <img src="/img/projects/wimereux/wimereux.png">
-    <h1>Wimereux</h1>
-    <p>
+  <div class="p-5 mb-5 flex flex-col gap-5 overflow-y-auto max-w-[70vw] max-md:max-w-full">
+    <img src="/img/projects/wimereux/wimereux.png" class="flex self-center w-[80%] h-auto max-md:w-full">
+    <h1 class="text-2xl font-bold">
+      Wimereux
+    </h1>
+    <p class="text-sm">
       <a
         href="http://wimereux.nl"
         target="_blank"
@@ -15,40 +17,3 @@
     </p>
   </div>
 </template>
-
-<style lang="scss">
-.wimereux-content {
-  padding: 20px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  overflow-y: auto;
-  max-width: 70vw;
-
-  img {
-    display: flex;
-    align-self: center;
-    width: 80%;
-    height: auto;
-  }
-
-  h1 {
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  p {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 768px) {
-  .wimereux-content {
-    max-width: 100%;
-  }
-  .wimereux-content img {
-    width: 100%;
-  }
-}
-</style>

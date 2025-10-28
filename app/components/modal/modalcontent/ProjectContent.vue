@@ -22,123 +22,32 @@ function itemClick(modalId: string) {
 </script>
 
 <template>
-  <div class="project-content">
-    <div class="util-row">
-      <span class="util-item">File</span>
-      <span class="util-item">Edit</span>
-      <span class="util-item">View</span>
-      <span class="util-item">Help</span>
+  <div class="p-2 pt-0 select-none">
+    <div class="flex gap-[5px] pt-0.5 pb-[5px]">
+      <span class="text-[10px] mr-1.5">File</span>
+      <span class="text-[10px] mr-1.5">Edit</span>
+      <span class="text-[10px] mr-1.5">View</span>
+      <span class="text-[10px] mr-1.5">Help</span>
     </div>
-    <div class="search-row">
+    <div class="flex gap-[5px]">
       <input
         :value="searchInput"
-        class="w95-border"
+        class="w95-border font-w95 text-[10px] focus:outline-none"
         type="text"
         placeholder="Search"
         @input="event => searchInput = (event.target as HTMLElement)?.value"
       >
     </div>
-    <div class="directory">
+    <div class="flex flex-row flex-wrap gap-2.5 p-5 min-w-[400px] max-w-[500px] overflow-y-auto items-center bg-white mt-2.5 max-[600px]:min-w-[300px] max-[600px]:max-w-[400px]">
       <div
         v-for="project in projects"
         :key="project.id"
-        class="project"
+        class="flex flex-col items-center gap-[5px] p-2.5 w-[30%] cursor-pointer max-[600px]:w-[40%]"
         @click="itemClick(project.id)"
       >
-        <img :src="`/img/icons/${project.image}`">
-        <span class="project-title">{{ project.title }}</span>
+        <img :src="`/img/icons/${project.image}`" class="w-[30px] h-[30px]">
+        <span class="text-xs">{{ project.title }}</span>
       </div>
     </div>
   </div>
 </template>
-
-<style lang="scss">
-@import "@/assets/style/index";
-
-.project-content {
-  padding: 8px;
-  padding-top: 0;
-  user-select: none;
-}
-
-.util-row {
-  display: flex;
-  gap: 5px;
-  padding-top: 2px;
-  padding-bottom: 5px;
-  .util-item {
-    font-size: 10px;
-    margin-right: 6px;
-  }
-}
-
-.search-row {
-  display: flex;
-  gap: 5px;
-
-  button {
-    display: flex;
-    align-content: center;
-    border-radius: 0;
-    padding: 3px;
-  }
-
-  img {
-    width: 15px;
-    height: 15px;
-  }
-
-  input[type="text"] {
-    font-family: "Windows 95";
-    font-size: 10px;
-  }
-  input[type="text"]:focus {
-    outline: none;
-  }
-}
-
-.directory {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  gap: 10px;
-  padding: 20px;
-  min-width: 400px;
-  max-width: 500px;
-  overflow-y: auto;
-  align-items: center;
-  background-color: white;
-  margin-top: 10px;
-
-  .project {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-items: center;
-    gap: 5px;
-    padding: 10px;
-    width: 30%;
-    cursor: pointer;
-
-    img {
-      width: 30px;
-      height: 30px;
-    }
-
-    .project-title {
-      font-size: 12px;
-    }
-  }
-}
-
-@media (max-width: 600px) {
-  .directory {
-    min-width: 300px;
-    max-width: 400px;
-  }
-  .project {
-    width: 40%;
-  }
-}
-</style>

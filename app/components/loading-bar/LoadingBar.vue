@@ -12,38 +12,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="loading-bar">
-    <span v-for="n in counter" :key="n" class="loading-block" />
+  <div class="absolute top-[70%] left-[calc(50%-150px)] w-[300px] h-[34px] bg-w95-gray z-[1000] flex flex-row items-center gap-0.5 border-t-2 border-l-2 border-r-2 border-b-2 border-t-w95-border-light border-l-w95-border-light border-r-w95-border-dark border-b-w95-border-dark overflow-hidden">
+    <span v-for="n in counter" :key="n" class="loading-block w-5 h-7 bg-w95-blue z-[1000] animate-[loading_2s_infinite]" />
   </div>
 </template>
-
-<style lang="scss">
-@import '@/assets/style/index';
-
-.loading-bar {
-  position: absolute;
-  top: 70%;
-  left: calc(50% - 150px);
-  width: 300px;
-  height: 34px;
-  background-color: $secondary-background;
-  z-index: 1000;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 2px;
-  border-top: 2px solid $border-light;
-  border-left: 2px solid $border-light;
-  border-right: 2px solid $border-dark;
-  border-bottom: 2px solid $border-dark;
-  overflow: hidden;
-}
-
-.loading-block {
-  width: 20px;
-  height: 28px;
-  background-color: $dark-blue;
-  z-index: 1000;
-  animation: loading 2s infinite;
-}
-</style>
