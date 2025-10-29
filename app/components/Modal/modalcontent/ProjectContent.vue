@@ -35,7 +35,7 @@ function itemClick(modalId: string) {
         class="w95-border font-w95 text-[10px] focus:outline-none"
         type="text"
         placeholder="Search"
-        @input="event => searchInput = (event.target as HTMLElement)?.value"
+        @input="event => searchInput = (event.target as HTMLInputElement)?.value"
       >
     </div>
     <div class="flex flex-row flex-wrap gap-2.5 p-5 min-w-[400px] max-w-[500px] overflow-y-auto items-center bg-white mt-2.5 max-[600px]:min-w-[300px] max-[600px]:max-w-[400px]">

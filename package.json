@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "6.14.0",
+    "@vueuse/nuxt": "14.0.0",
     "nuxt": "latest",
     "vue": "latest"
   },

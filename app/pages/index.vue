@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import LoadingBar from '@/components/loading-bar/LoadingBar.vue'
 import { useModalStore } from '@/composables/useModals'
 
 const modalStore = useModalStore()

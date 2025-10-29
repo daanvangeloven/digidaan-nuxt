@@ -11,6 +11,9 @@ importers:
       '@nuxtjs/tailwindcss':
         specifier: 6.14.0
         version: 6.14.0(magicast@0.5.0)(yaml@2.8.1)
+      '@vueuse/nuxt':
+        specifier: 14.0.0
+        version: 14.0.0(magicast@0.5.0)(nuxt@4.2.0(@parcel/watcher@2.5.1)(@vue/compiler-sfc@3.5.22)(db0@0.3.4)(eslint@9.38.0(jiti@2.6.1))(ioredis@5.8.2)(magicast@0.5.0)(optionator@0.9.4)(rollup@4.52.5)(sass@1.93.2)(terser@5.44.0)(typescript@5.9.3)(vite@7.1.12(jiti@2.6.1)(sass@1.93.2)(terser@5.44.0)(yaml@2.8.1))(yaml@2.8.1))(vue@3.5.22(typescript@5.9.3))
       nuxt:
         specifier: latest
         version: 4.2.0(@parcel/watcher@2.5.1)(@vue/compiler-sfc@3.5.22)(db0@0.3.4)(eslint@9.38.0(jiti@2.6.1))(ioredis@5.8.2)(magicast@0.5.0)(optionator@0.9.4)(rollup@4.52.5)(sass@1.93.2)(terser@5.44.0)(typescript@5.9.3)(vite@7.1.12(jiti@2.6.1)(sass@1.93.2)(terser@5.44.0)(yaml@2.8.1))(yaml@2.8.1)
@@ -1230,6 +1233,9 @@ packages:
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
 
+  '@types/web-bluetooth@0.0.21':
+    resolution: {integrity: sha512-oIQLCGWtcFZy2JW77j9k8nHzAOpqMHLQejDA48XXMWH6tjCQHz5RCFz1bzsmROyL6PUm+LLnUiI4BCn221inxA==}
+
   '@typescript-eslint/eslint-plugin@8.46.2':
     resolution: {integrity: sha512-ZGBMToy857/NIPaaCucIUQgqueOiq7HeAKkhlvqVV4lm089zUFW6ikRySx2v+cAhKeUCPuWVHeimyk6Dw1iY3w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -1407,6 +1413,25 @@ packages:
 
   '@vue/shared@3.5.22':
     resolution: {integrity: sha512-F4yc6palwq3TT0u+FYf0Ns4Tfl9GRFURDN2gWG7L1ecIaS/4fCIuFOjMTnCyjsu/OK6vaDKLCrGAa+KvvH+h4w==}
+
+  '@vueuse/core@14.0.0':
+    resolution: {integrity: sha512-d6tKRWkZE8IQElX2aHBxXOMD478fHIYV+Dzm2y9Ag122ICBpNKtGICiXKOhWU3L1kKdttDD9dCMS4bGP3jhCTQ==}
+    peerDependencies:
+      vue: ^3.5.0
+
+  '@vueuse/metadata@14.0.0':
+    resolution: {integrity: sha512-6yoGqbJcMldVCevkFiHDBTB1V5Hq+G/haPlGIuaFZHpXC0HADB0EN1ryQAAceiW+ryS3niUwvdFbGiqHqBrfVA==}
+
+  '@vueuse/nuxt@14.0.0':
+    resolution: {integrity: sha512-6DNZ1DLw3UI52TtVX4jmL8oD/L3jFgtWeQmsSXP+0myMhpmlBpWB2xe1x5UdwdHly9j1Fq9DI8wz+LsW6wvdeg==}
+    peerDependencies:
+      nuxt: ^3.0.0 || ^4.0.0-0
+      vue: ^3.5.0
+
+  '@vueuse/shared@14.0.0':
+    resolution: {integrity: sha512-mTCA0uczBgurRlwVaQHfG0Ja7UdGe4g9mwffiJmvLiTtp1G4AQyIjej6si/k8c8pUwTfVpNufck+23gXptPAkw==}
+    peerDependencies:
+      vue: ^3.5.0
 
   abbrev@3.0.1:
     resolution: {integrity: sha512-AO2ac6pjRB3SJmGJo+v5/aK6Omggp6fsLrs6wN9bd35ulu4cCwaAU9+7ZhXjeqHVkaHThLuzH0nZr0YpCDhygg==}
@@ -5863,6 +5888,8 @@ snapshots:
 
   '@types/unist@3.0.3': {}
 
+  '@types/web-bluetooth@0.0.21': {}
+
   '@typescript-eslint/eslint-plugin@8.46.2(@typescript-eslint/parser@8.46.2(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
       '@eslint-community/regexpp': 4.12.2
@@ -6147,6 +6174,30 @@ snapshots:
       vue: 3.5.22(typescript@5.9.3)
 
   '@vue/shared@3.5.22': {}
+
+  '@vueuse/core@14.0.0(vue@3.5.22(typescript@5.9.3))':
+    dependencies:
+      '@types/web-bluetooth': 0.0.21
+      '@vueuse/metadata': 14.0.0
+      '@vueuse/shared': 14.0.0(vue@3.5.22(typescript@5.9.3))
+      vue: 3.5.22(typescript@5.9.3)
+
+  '@vueuse/metadata@14.0.0': {}
+
+  '@vueuse/nuxt@14.0.0(magicast@0.5.0)(nuxt@4.2.0(@parcel/watcher@2.5.1)(@vue/compiler-sfc@3.5.22)(db0@0.3.4)(eslint@9.38.0(jiti@2.6.1))(ioredis@5.8.2)(magicast@0.5.0)(optionator@0.9.4)(rollup@4.52.5)(sass@1.93.2)(terser@5.44.0)(typescript@5.9.3)(vite@7.1.12(jiti@2.6.1)(sass@1.93.2)(terser@5.44.0)(yaml@2.8.1))(yaml@2.8.1))(vue@3.5.22(typescript@5.9.3))':
+    dependencies:
+      '@nuxt/kit': 4.2.0(magicast@0.5.0)
+      '@vueuse/core': 14.0.0(vue@3.5.22(typescript@5.9.3))
+      '@vueuse/metadata': 14.0.0
+      local-pkg: 1.1.2
+      nuxt: 4.2.0(@parcel/watcher@2.5.1)(@vue/compiler-sfc@3.5.22)(db0@0.3.4)(eslint@9.38.0(jiti@2.6.1))(ioredis@5.8.2)(magicast@0.5.0)(optionator@0.9.4)(rollup@4.52.5)(sass@1.93.2)(terser@5.44.0)(typescript@5.9.3)(vite@7.1.12(jiti@2.6.1)(sass@1.93.2)(terser@5.44.0)(yaml@2.8.1))(yaml@2.8.1)
+      vue: 3.5.22(typescript@5.9.3)
+    transitivePeerDependencies:
+      - magicast
+
+  '@vueuse/shared@14.0.0(vue@3.5.22(typescript@5.9.3))':
+    dependencies:
+      vue: 3.5.22(typescript@5.9.3)
 
   abbrev@3.0.1: {}
 

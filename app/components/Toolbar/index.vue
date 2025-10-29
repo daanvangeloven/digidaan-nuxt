@@ -16,6 +16,12 @@ const taskbar = computed(() =>
 )
 
 const showStartMenu = ref(false)
+const startButtonRef = ref<HTMLElement>()
+
+function handleTabClicked(tabId: string) {
+  openModal(tabId)
+  toggleStartMenu()
+}
 
 function toggleStartMenu() {
   showStartMenu.value = !showStartMenu.value
@@ -28,35 +34,29 @@ function handleStartButtonClick(e: Event) {
   toggleStartMenu()
 }
 
-function handleWindowClick(e: Event) {
-  if (
-    showStartMenu.value
-    && !(e.target as HTMLElement).closest('.start-menu')
-  ) {
+onClickOutside(startButtonRef, (event) => {
+  // Don't close if clicking on the start menu itself
+  if (showStartMenu.value && !(event.target as HTMLElement).closest('.start-menu')) {
     toggleStartMenu()
   }
-}
+})
 
 onMounted(() => {
-  window.addEventListener('click', handleWindowClick)
   setInterval(() => {
     time.value = new Date()
   }, 1000)
 })
-
-onBeforeUnmount(() => {
-  window.removeEventListener('click', handleWindowClick)
-})
 </script>
 
 <template>
-  <start-menu
+  <StartMenu
     v-if="showStartMenu"
     class="start-menu"
   />
   <div class="w-screen h-9 text-[0.65rem] p-[7px] select-none bg-w95-gray absolute bottom-0 flex items-center justify-between overflow-hidden">
     <div class="flex items-center text-center align-middle text-black text-[0.65rem] h-6 cursor-pointer">
       <span
+        ref="startButtonRef"
         class="flex items-center px-1 mr-0.5 px-1 text-black cursor-pointer whitespace-nowrap w95-button-border"
         @click="handleStartButtonClick($event)"
       >
@@ -74,7 +74,7 @@ onBeforeUnmount(() => {
         :key="tab.id"
         class="mr-0.5 px-1 text-black cursor-pointer whitespace-nowrap flex items-center text-center align-middle text-[0.65rem] h-6 w95-button-border"
         :class="{ 'active-tab': tab.id === modalStore.activeModal.value }"
-        @click="openModal(tab.id)"
+        @click="handleTabClicked(tab.id)"
       >
         <img
           class="mr-1 max-h-[80%] max-w-[25px]"
@@ -83,7 +83,7 @@ onBeforeUnmount(() => {
         <span>{{ tab.title }}</span>
       </div>
     </div>
-    <div class="py-[5px] px-[15px] mr-0.5 px-1 text-black cursor-pointer whitespace-nowrap flex items-center text-center align-middle text-[0.65rem] h-6 w95-border-inverse">
+    <div class="py-[5px] mr-0.5 px-1 text-black cursor-pointer whitespace-nowrap flex items-center text-center align-middle text-[0.65rem] h-6 w95-border-inverse">
       {{ timeOutput }}
     </div>
   </div>
