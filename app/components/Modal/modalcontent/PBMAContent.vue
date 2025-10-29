@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useModalStore } from '@/composables/useModals'
+import { useModalStore } from '@/composables/useModals';
 
-const { openModal } = useModalStore()
+const { openModal } = useModalStore();
 </script>
 
 <template>

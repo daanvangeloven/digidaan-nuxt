@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import data from '@/assets/json/experience.json'
+import data from '@/assets/json/experience.json';
 
-const experience = data.experience
-const skills = data.skills
+const experience = data.experience;
+const skills = data.skills;
 </script>
 
 <template>

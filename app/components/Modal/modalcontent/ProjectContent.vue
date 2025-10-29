@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import data from '@/assets/json/projects.json'
-import { useModalStore } from '@/composables/useModals'
+import data from '@/assets/json/projects.json';
+import { useModalStore } from '@/composables/useModals';
 
-const { openModal } = useModalStore()
-const searchInput = ref('')
+const { openModal } = useModalStore();
+const searchInput = ref('');
 
 const projects = computed(() => {
   if (searchInput.value === '') {
-    return data.projects
+    return data.projects;
   }
   else {
     return data.projects.filter(project =>
       project.title.toLowerCase().includes(searchInput.value.toLowerCase()),
-    )
+    );
   }
-})
+});
 
 function itemClick(modalId: string) {
-  openModal(modalId)
+  openModal(modalId);
 }
 </script>
 

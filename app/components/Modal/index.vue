@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { useModalStore } from '@/composables/useModals'
+import { useModalStore } from '@/composables/useModals';
 
 const props = defineProps<{
-  id: string
-  icon: string
-  initialX: number
-  initialY: number
-}>()
+  id: string;
+  icon: string;
+  initialX: number;
+  initialY: number;
+}>();
 
 const { closeModal, minimizeModal, modalMoved, bringToFront }
-  = useModalStore()
+  = useModalStore();
 
-const modal = ref<HTMLElement>()
-const modalHeader = ref<HTMLElement>()
+const modal = ref<HTMLElement>();
+const modalHeader = ref<HTMLElement>();
 
-const { width: windowWidth, height: windowHeight } = useWindowSize()
+const { width: windowWidth, height: windowHeight } = useWindowSize();
 
 const { x, y, isDragging, style } = useDraggable(modal, {
   initialValue: { x: props.initialX, y: props.initialY },
@@ -23,48 +23,48 @@ const { x, y, isDragging, style } = useDraggable(modal, {
   onStart: (position, event) => {
     // Don't drag if clicking on control buttons
     if ((event.target as HTMLElement).closest('.control-button')) {
-      return false
+      return false;
     }
   },
-})
+});
 
 // Save position when dragging ends and constrain to viewport
 watch(isDragging, (dragging) => {
   if (!dragging) {
-    let finalX = x.value
-    let finalY = y.value
+    let finalX = x.value;
+    let finalY = y.value;
 
     if (modal.value) {
-      const modalRect = modal.value.getBoundingClientRect()
-      const viewportWidth = windowWidth.value
-      const viewportHeight = windowHeight.value - 36 // 36px toolbar height
+      const modalRect = modal.value.getBoundingClientRect();
+      const viewportWidth = windowWidth.value;
+      const viewportHeight = windowHeight.value - 36; // 36px toolbar height
 
       // Constrain x position
       if (finalX < 0) {
-        finalX = 0
+        finalX = 0;
       }
       else if (finalX + modalRect.width > viewportWidth) {
-        finalX = Math.max(0, viewportWidth - modalRect.width)
+        finalX = Math.max(0, viewportWidth - modalRect.width);
       }
 
       // Constrain y position
       if (finalY < 0) {
-        finalY = 0
+        finalY = 0;
       }
       else if (finalY + modalRect.height > viewportHeight) {
-        finalY = Math.max(0, viewportHeight - modalRect.height)
+        finalY = Math.max(0, viewportHeight - modalRect.height);
       }
 
       // Update position if constrained
       if (finalX !== x.value || finalY !== y.value) {
-        x.value = finalX
-        y.value = finalY
+        x.value = finalX;
+        y.value = finalY;
       }
     }
 
-    modalMoved(props.id, finalX, finalY)
+    modalMoved(props.id, finalX, finalY);
   }
-})
+});
 </script>
 
 <template>

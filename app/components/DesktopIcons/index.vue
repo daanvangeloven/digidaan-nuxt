@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import data from '@/assets/json/screens.json'
-import { useModalStore } from '@/composables/useModals'
+import data from '@/assets/json/screens.json';
+import { useModalStore } from '@/composables/useModals';
 
-const { openModal } = useModalStore()
+const { openModal } = useModalStore();
 
-const screens = data.screens.filter(screen => screen.onDesktop === true)
+const screens = data.screens.filter(screen => screen.onDesktop === true);
 
 function itemClick(modalId: string) {
-  openModal(modalId)
+  openModal(modalId);
 }
 </script>
 

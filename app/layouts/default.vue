@@ -13,7 +13,7 @@ useSeoMeta({
     'A Windows 95 inspired portfolio for my front-end development work.',
   twitterImage: '/img/w95-backgroundlogo.png',
   twitterCard: 'summary',
-})
+});
 
 useHead({
   htmlAttrs: {
@@ -29,7 +29,7 @@ useHead({
   bodyAttrs: {
     class: 'reset-body',
   },
-})
+});
 </script>
 
 <template>

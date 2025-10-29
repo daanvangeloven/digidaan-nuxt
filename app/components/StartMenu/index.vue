@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import data from '@/assets/json/screens.json'
-import { useModalStore } from '@/composables/useModals'
+import data from '@/assets/json/screens.json';
+import { useModalStore } from '@/composables/useModals';
 
-const { openModal } = useModalStore()
+const { openModal } = useModalStore();
 
 function itemClick(modalId: any) {
-  openModal(modalId)
+  openModal(modalId);
 }
 
 const screens = data.screens.filter(
   screen => screen.onStartMenu === true,
-)
+);
 </script>
 
 <template>

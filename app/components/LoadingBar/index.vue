@@ -1,14 +1,14 @@
 <script setup lang="ts">
-const counter = ref(1)
+const counter = ref(1);
 
 onMounted(() => {
   setInterval(() => {
-    counter.value++
+    counter.value++;
     if (counter.value === 15) {
-      counter.value = 0
+      counter.value = 0;
     }
-  }, 300)
-})
+  }, 300);
+});
 </script>
 
 <template>

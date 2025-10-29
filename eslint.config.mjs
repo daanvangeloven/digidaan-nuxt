@@ -1,6 +1,8 @@
-import antfu from '@antfu/eslint-config'
+import antfu from '@antfu/eslint-config';
 
 export default antfu({
-  // Enable stylistic formatting rules
-  stylistic: true,
-})
+  stylistic: {
+    semi: true, // Enforce semicolons
+    commaDangle: 'always-multiline', // Trailing commas in multiline
+  },
+});

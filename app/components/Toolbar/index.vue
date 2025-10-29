@@ -1,46 +1,46 @@
 <script setup lang="ts">
-import { useModalStore } from '@/composables/useModals'
+import { useModalStore } from '@/composables/useModals';
 
-const now = useNow()
+const now = useNow();
 
 const timeOutput = computed(() => {
-  const hours = now.value.getHours().toString().padStart(2, '0')
-  const minutes = now.value.getMinutes().toString().padStart(2, '0')
-  return `${hours}:${minutes}`
-})
+  const hours = now.value.getHours().toString().padStart(2, '0');
+  const minutes = now.value.getMinutes().toString().padStart(2, '0');
+  return `${hours}:${minutes}`;
+});
 
-const modalStore = useModalStore()
-const { openModal } = modalStore
+const modalStore = useModalStore();
+const { openModal } = modalStore;
 
 const taskbar = computed(() =>
   modalStore.modals.value.filter(modal => modal.taskbar),
-)
+);
 
-const showStartMenu = ref(false)
-const startButtonRef = ref<HTMLElement>()
+const showStartMenu = ref(false);
+const startButtonRef = ref<HTMLElement>();
 
 function handleTabClicked(tabId: string) {
-  openModal(tabId)
-  toggleStartMenu()
+  openModal(tabId);
+  toggleStartMenu();
 }
 
 function toggleStartMenu() {
-  showStartMenu.value = !showStartMenu.value
-  const startButton = document.querySelector('.start-button-inner-text')
-  startButton?.classList.toggle('active')
+  showStartMenu.value = !showStartMenu.value;
+  const startButton = document.querySelector('.start-button-inner-text');
+  startButton?.classList.toggle('active');
 }
 
 function handleStartButtonClick(e: Event) {
-  e.stopPropagation()
-  toggleStartMenu()
+  e.stopPropagation();
+  toggleStartMenu();
 }
 
 onClickOutside(startButtonRef, (event) => {
   // Don't close if clicking on the start menu itself
   if (showStartMenu.value && !(event.target as HTMLElement).closest('.start-menu')) {
-    toggleStartMenu()
+    toggleStartMenu();
   }
-})
+});
 </script>
 
 <template>

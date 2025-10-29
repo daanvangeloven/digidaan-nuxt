@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { useModalStore } from '@/composables/useModals'
+import { useModalStore } from '@/composables/useModals';
 
-const modalStore = useModalStore()
-const loading = ref(true)
+const modalStore = useModalStore();
+const loading = ref(true);
 
 onMounted(() => {
-  loading.value = false
-})
+  loading.value = false;
+});
 
 useHead({
   bodyAttrs: {
     class: 'reset-body',
   },
-})
+});
 </script>
 
 <template>

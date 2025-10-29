@@ -45,8 +45,8 @@ export default {
           borderBottom: '1px solid #fcfcfc',
           borderRight: '1px solid #fcfcfc',
         },
-      }
-      addUtilities(newUtilities)
+      };
+      addUtilities(newUtilities);
     },
   ],
-}
+};
