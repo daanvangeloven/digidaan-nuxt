@@ -12,7 +12,7 @@ const modalStore = useModalStore()
 const { openModal } = modalStore
 
 const taskbar = computed(() =>
-  modalStore.modals.filter(modal => modal.taskbar),
+  modalStore.modals.value.filter(modal => modal.taskbar),
 )
 
 const showStartMenu = ref(false)
@@ -73,7 +73,7 @@ onBeforeUnmount(() => {
         v-for="tab in taskbar"
         :key="tab.id"
         class="mr-0.5 px-1 text-black cursor-pointer whitespace-nowrap flex items-center text-center align-middle text-[0.65rem] h-6 w95-button-border"
-        :class="{ 'active-tab': tab.id === modalStore.activeModal }"
+        :class="{ 'active-tab': tab.id === modalStore.activeModal.value }"
         @click="openModal(tab.id)"
       >
         <img

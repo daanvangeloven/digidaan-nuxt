@@ -1,37 +1,53 @@
 import type { Modal } from '~/types/modal'
-import { defineStore } from 'pinia'
-import { markRaw, ref } from 'vue'
+import { markRaw } from 'vue'
 import data from '@/assets/json/screens.json'
 
-export const useModalStore = defineStore('modalStore', () => {
-  const modals = ref<Modal[]>([])
-  const zIndexCounter = ref(100)
-  const activeModal = ref<string>('')
+export function useModalStore() {
+  const modals = useState<Modal[]>('modals', () => [])
+  const zIndexCounter = useState<number>('zIndexCounter', () => 100)
+  const activeModal = useState<string>('activeModal', () => '')
 
   const loadModalsFromStorage = () => {
     if (import.meta.client) {
-      const storedModals = localStorage.getItem('modals')
+      try {
+        const storedModals = localStorage.getItem('modals')
 
-      if (storedModals) {
-        modals.value = JSON.parse(storedModals)
+        if (storedModals) {
+          const parsedModals = JSON.parse(storedModals)
 
-        zIndexCounter.value = Math.max(
-          ...modals.value.map(modal => modal.zIndex),
-          zIndexCounter.value,
-        )
+          // Validate that parsedModals is an array with proper structure
+          if (Array.isArray(parsedModals) && parsedModals.every(m => m.id && m.contentName)) {
+            modals.value = parsedModals
 
-        modals.value.forEach((modal) => {
-          loadComponent(modal.contentName).then((component) => {
-            if (component) {
-              modal.content = markRaw(component)
-            }
-            else {
-              console.error(
-                `Component failed to load from pinia: ${modal.contentName}`,
-              )
-            }
-          })
-        })
+            zIndexCounter.value = Math.max(
+              ...modals.value.map(modal => modal.zIndex),
+              zIndexCounter.value,
+            )
+
+            modals.value.forEach((modal) => {
+              loadComponent(modal.contentName).then((component) => {
+                if (component) {
+                  modal.content = markRaw(component)
+                }
+                else {
+                  console.error(
+                    `Component failed to load from useState: ${modal.contentName}`,
+                  )
+                }
+              })
+            })
+          }
+          else {
+            // Invalid data format, clear localStorage
+            console.warn('Invalid modal data in localStorage, clearing...')
+            localStorage.removeItem('modals')
+          }
+        }
+      }
+      catch (error) {
+        // If there's any error parsing or loading, clear the corrupted data
+        console.error('Error loading modals from localStorage:', error)
+        localStorage.removeItem('modals')
       }
     }
   }
@@ -121,7 +137,9 @@ export const useModalStore = defineStore('modalStore', () => {
     }
   }
 
-  loadModalsFromStorage()
+  if (import.meta.client && modals.value.length === 0) {
+    loadModalsFromStorage()
+  }
 
   return {
     modals,
@@ -132,4 +150,4 @@ export const useModalStore = defineStore('modalStore', () => {
     modalMoved,
     activeModal,
   }
-})
+}

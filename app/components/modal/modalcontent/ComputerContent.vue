@@ -28,9 +28,6 @@
         <li class="text-lg">
           Typescript
         </li>
-        <li class="text-lg">
-          Pinia
-        </li>
       </ul>
     </div>
     <div class="flex justify-center flex-col gap-2.5">

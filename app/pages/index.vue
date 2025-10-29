@@ -26,7 +26,7 @@ useHead({
     class="content"
   >
     <DesktopIcons />
-    <div v-for="(modal, index) in modalStore.modals" :key="index">
+    <div v-for="(modal, index) in modalStore.modals.value" :key="index">
       <Modal
         :id="modal.id"
         :icon="modal.icon"
