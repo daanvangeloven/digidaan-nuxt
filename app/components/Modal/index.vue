@@ -4,80 +4,65 @@ import { useModalStore } from '@/composables/useModals'
 const props = defineProps<{
   id: string
   icon: string
+  initialX: number
+  initialY: number
 }>()
 
 const { closeModal, minimizeModal, modalMoved, bringToFront }
   = useModalStore()
 
-const modal = ref<HTMLElement | null>(null)
-const modalHeader = ref<HTMLElement | null>(null)
-let isDragging = false
-let offsetX = 0
-let offsetY = 0
-let newPosition = { x: 0, y: 0 }
+const modal = ref<HTMLElement>()
+const modalHeader = ref<HTMLElement>()
 
-function onMouseDown(event: MouseEvent) {
-  if ((event.target as HTMLElement).closest('.control-button')) {
-    return
-  }
-  isDragging = true
-  const modalRect = modal.value!.getBoundingClientRect()
-  offsetX = event.clientX - modalRect.left
-  offsetY = event.clientY - modalRect.top
-  document.addEventListener('mousemove', onMouseMove)
-  document.addEventListener('mouseup', onMouseUp)
-}
+const { width: windowWidth, height: windowHeight } = useWindowSize()
 
-// Handle mouse movement to move the modal, constrained within viewport
-function onMouseMove(event: MouseEvent) {
-  if (isDragging) {
-    const modalRect = modal.value!.getBoundingClientRect()
-    const viewportWidth = window.innerWidth
-    const viewportHeight = window.innerHeight - 36 // 36px toolbar height
-
-    let newLeft = event.clientX - offsetX
-    let newTop = event.clientY - offsetY
-
-    if (newLeft < 0) {
-      newLeft = 0
+const { x, y, isDragging, style } = useDraggable(modal, {
+  initialValue: { x: props.initialX, y: props.initialY },
+  handle: modalHeader,
+  preventDefault: true,
+  onStart: (position, event) => {
+    // Don't drag if clicking on control buttons
+    if ((event.target as HTMLElement).closest('.control-button')) {
+      return false
     }
-    else if (newLeft + modalRect.width > viewportWidth) {
-      newLeft = viewportWidth - modalRect.width
-    }
-
-    if (newTop < 0) {
-      newTop = 0
-    }
-    else if (newTop + modalRect.height > viewportHeight) {
-      newTop = viewportHeight - modalRect.height
-    }
-
-    modal.value!.style.left = `${newLeft}px`
-    modal.value!.style.top = `${newTop}px`
-
-    newPosition = { x: newLeft, y: newTop }
-  }
-}
-
-function onMouseUp() {
-  isDragging = false
-  document.removeEventListener('mousemove', onMouseMove)
-  document.removeEventListener('mouseup', onMouseUp)
-
-  if (newPosition.x !== 0 || newPosition.y !== 0) {
-    modalMoved(props.id, newPosition.x, newPosition.y)
-  }
-}
-
-onMounted(() => {
-  if (modalHeader.value) {
-    modalHeader.value.addEventListener('mousedown', onMouseDown)
-  }
+  },
 })
 
-onBeforeUnmount(() => {
-  if (modalHeader.value) {
-    modalHeader.value.removeEventListener('mousedown', onMouseDown)
+// Save position when dragging ends and constrain to viewport
+watch(isDragging, (dragging) => {
+  if (!dragging) {
+    let finalX = x.value
+    let finalY = y.value
+
+    if (modal.value) {
+      const modalRect = modal.value.getBoundingClientRect()
+      const viewportWidth = windowWidth.value
+      const viewportHeight = windowHeight.value - 36 // 36px toolbar height
+
+      // Constrain x position
+      if (finalX < 0) {
+        finalX = 0
+      }
+      else if (finalX + modalRect.width > viewportWidth) {
+        finalX = Math.max(0, viewportWidth - modalRect.width)
+      }
+
+      // Constrain y position
+      if (finalY < 0) {
+        finalY = 0
+      }
+      else if (finalY + modalRect.height > viewportHeight) {
+        finalY = Math.max(0, viewportHeight - modalRect.height)
+      }
+
+      // Update position if constrained
+      if (finalX !== x.value || finalY !== y.value) {
+        x.value = finalX
+        y.value = finalY
+      }
+    }
+
+    modalMoved(props.id, finalX, finalY)
   }
 })
 </script>
@@ -86,11 +71,13 @@ onBeforeUnmount(() => {
   <div
     ref="modal"
     class="absolute min-w-[300px] min-h-[200px] max-h-[80vh] max-w-[1024px] bg-w95-gray border-t-2 border-l-2 border-r-2 border-b-2 border-t-white border-l-white border-r-[#393939] border-b-[#393939] overflow-hidden cursor-default"
+    :style="style"
     @mousedown="bringToFront(id)"
   >
     <div
       ref="modalHeader"
       class="bg-w95-blue text-white h-6 flex flex-row justify-between items-center text-[10px] leading-[1.5] w-full select-none cursor-pointer"
+      @mousedown="bringToFront(id)"
     >
       <div class="flex gap-1 items-center">
         <img
@@ -103,13 +90,13 @@ onBeforeUnmount(() => {
       </div>
       <div class="flex gap-1 items-center">
         <button
-          class="flex items-center justify-center bg-w95-gray text-black text-[10px] cursor-pointer h-4 w-4 tracking-wide font-bold leading-none w95-button-border"
+          class="control-button flex items-center justify-center bg-w95-gray text-black text-[10px] cursor-pointer h-4 w-4 tracking-wide font-bold leading-none w95-button-border"
           @click="minimizeModal(id)"
         >
           —
         </button>
         <button
-          class="flex items-center justify-center bg-w95-gray text-black text-[10px] cursor-pointer h-4 w-4 tracking-wide font-bold leading-none mr-1 w95-button-border -translate-y-px"
+          class="control-button flex items-center justify-center bg-w95-gray text-black text-[10px] cursor-pointer h-4 w-4 tracking-wide font-bold leading-none mr-1 w95-button-border -translate-y-px"
           @click="closeModal(id)"
         >
           ✖

@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { useModalStore } from '@/composables/useModals'
 
-const time = ref(new Date())
+const now = useNow()
 
 const timeOutput = computed(() => {
-  const hours = time.value.getHours().toString().padStart(2, '0')
-  const minutes = time.value.getMinutes().toString().padStart(2, '0')
+  const hours = now.value.getHours().toString().padStart(2, '0')
+  const minutes = now.value.getMinutes().toString().padStart(2, '0')
   return `${hours}:${minutes}`
 })
+
 const modalStore = useModalStore()
 const { openModal } = modalStore
 
@@ -39,12 +40,6 @@ onClickOutside(startButtonRef, (event) => {
   if (showStartMenu.value && !(event.target as HTMLElement).closest('.start-menu')) {
     toggleStartMenu()
   }
-})
-
-onMounted(() => {
-  setInterval(() => {
-    time.value = new Date()
-  }, 1000)
 })
 </script>
 

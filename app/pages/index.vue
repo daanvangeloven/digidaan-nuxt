@@ -29,11 +29,11 @@ useHead({
       <Modal
         :id="modal.id"
         :icon="modal.icon"
+        :initial-x="modal.x"
+        :initial-y="modal.y"
         :class="{ minimized: modal.minimized }"
         :style="{
           'z-index': modal.zIndex,
-          'left': `${modal.x}px`,
-          'top': `${modal.y}px`,
         }"
       >
         <template #header-title>

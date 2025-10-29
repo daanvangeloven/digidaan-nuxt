@@ -2,60 +2,80 @@ import type { Modal } from '~/types/modal'
 import { markRaw } from 'vue'
 import data from '@/assets/json/screens.json'
 
+interface SerializableModal {
+  id: string
+  title: string
+  icon: string
+  contentName: string
+  minimized: boolean
+  taskbar: boolean
+  zIndex: number
+  x: number
+  y: number
+}
+
 export function useModalStore() {
-  const modals = useState<Modal[]>('modals', () => [])
-  const zIndexCounter = useState<number>('zIndexCounter', () => 100)
+  // Use useLocalStorage for automatic persistence
+  const storedModals = useLocalStorage<SerializableModal[]>('modals', [], {
+    serializer: {
+      read: (value: string) => {
+        try {
+          const parsed = JSON.parse(value)
+          // Validate structure
+          if (Array.isArray(parsed) && parsed.every(m => m.id && m.contentName)) {
+            return parsed
+          }
+          console.warn('Invalid modal data in localStorage, resetting...')
+          return []
+        }
+        catch {
+          return []
+        }
+      },
+      write: (value: SerializableModal[]) => JSON.stringify(value),
+    },
+  })
+
+  const zIndexCounter = useState<number>('zIndexCounter', () => {
+    // Initialize from stored modals
+    if (storedModals.value.length > 0) {
+      return Math.max(...storedModals.value.map(m => m.zIndex), 100)
+    }
+    return 100
+  })
+
   const activeModal = useState<string>('activeModal', () => '')
+  const modals = useState<Modal[]>('modals', () => [])
+  const isLoaded = useState<boolean>('modals-loaded', () => false)
 
-  const loadModalsFromStorage = () => {
-    if (import.meta.client) {
-      try {
-        const storedModals = localStorage.getItem('modals')
+  // Load components for stored modals on client side - only once
+  const loadStoredModals = async () => {
+    if (!isLoaded.value && storedModals.value.length > 0) {
+      isLoaded.value = true
+      const loadedModals: Modal[] = []
 
-        if (storedModals) {
-          const parsedModals = JSON.parse(storedModals)
-
-          // Validate that parsedModals is an array with proper structure
-          if (Array.isArray(parsedModals) && parsedModals.every(m => m.id && m.contentName)) {
-            modals.value = parsedModals
-
-            zIndexCounter.value = Math.max(
-              ...modals.value.map(modal => modal.zIndex),
-              zIndexCounter.value,
-            )
-
-            modals.value.forEach((modal) => {
-              loadComponent(modal.contentName).then((component) => {
-                if (component) {
-                  modal.content = markRaw(component)
-                }
-                else {
-                  console.error(
-                    `Component failed to load from useState: ${modal.contentName}`,
-                  )
-                }
-              })
-            })
-          }
-          else {
-            // Invalid data format, clear localStorage
-            console.warn('Invalid modal data in localStorage, clearing...')
-            localStorage.removeItem('modals')
-          }
+      for (const storedModal of storedModals.value) {
+        const component = await loadComponent(storedModal.contentName)
+        if (component) {
+          loadedModals.push({
+            ...storedModal,
+            content: markRaw(component),
+          })
         }
       }
-      catch (error) {
-        // If there's any error parsing or loading, clear the corrupted data
-        console.error('Error loading modals from localStorage:', error)
-        localStorage.removeItem('modals')
-      }
+
+      modals.value = loadedModals
     }
   }
 
-  const saveModalsToStorage = () => {
-    if (import.meta.client) {
-      localStorage.setItem('modals', JSON.stringify(modals.value))
-    }
+  // Load on client side
+  if (import.meta.client) {
+    loadStoredModals()
+  }
+
+  // Sync modals to localStorage whenever they change
+  const syncToStorage = () => {
+    storedModals.value = modals.value.map(({ content, ...rest }) => rest)
   }
 
   const addModal = async (screenData: any) => {
@@ -74,14 +94,14 @@ export function useModalStore() {
         y: 0,
       }
       modals.value.push(newModal)
-      saveModalsToStorage()
+      syncToStorage()
     }
   }
 
   async function loadComponent(content: string) {
     try {
       const component = await import(
-        `@/components/modal/modalcontent/${content}.vue`,
+        `@/components/Modal/modalcontent/${content}.vue`,
       )
       return component.default
     }
@@ -96,7 +116,7 @@ export function useModalStore() {
     if (existingModal) {
       existingModal.zIndex = zIndexCounter.value++
       activeModal.value = modalId
-      saveModalsToStorage()
+      syncToStorage()
     }
   }
 
@@ -117,14 +137,14 @@ export function useModalStore() {
 
   const closeModal = (modalId: string) => {
     modals.value = modals.value.filter(modal => modal.id !== modalId)
-    saveModalsToStorage()
+    syncToStorage()
   }
 
   const minimizeModal = (modalId: string) => {
     const existingModal = modals.value.find(m => m.id === modalId)
     if (existingModal) {
       existingModal.minimized = true
-      saveModalsToStorage()
+      syncToStorage()
     }
   }
 
@@ -133,12 +153,8 @@ export function useModalStore() {
     if (existingModal) {
       existingModal.x = x
       existingModal.y = y
-      saveModalsToStorage()
+      syncToStorage()
     }
-  }
-
-  if (import.meta.client && modals.value.length === 0) {
-    loadModalsFromStorage()
   }
 
   return {
