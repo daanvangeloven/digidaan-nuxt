@@ -17,7 +17,7 @@
       </h3>
       <ul class="list-none p-0">
         <li class="text-lg">
-          NuxtJS
+          Nuxt
         </li>
         <li class="text-lg">
           Vue 3

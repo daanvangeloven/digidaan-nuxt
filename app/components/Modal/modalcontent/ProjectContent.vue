@@ -22,7 +22,7 @@ function itemClick(modalId: string) {
 </script>
 
 <template>
-  <div class="p-2 pt-0 select-none">
+  <div class="p-2 pt-0 select-none max-sm:flex max-sm:flex-col max-sm:flex-1">
     <div class="flex gap-[5px] pt-0.5 pb-[5px]">
       <span class="text-[10px] mr-1.5">File</span>
       <span class="text-[10px] mr-1.5">Edit</span>
@@ -38,7 +38,7 @@ function itemClick(modalId: string) {
         @input="event => searchInput = (event.target as HTMLInputElement)?.value"
       >
     </div>
-    <div class="flex flex-row flex-wrap gap-2.5 p-5 min-w-[400px] max-w-[500px] overflow-y-auto items-center bg-white mt-2.5 max-[600px]:min-w-[300px] max-[600px]:max-w-[400px]">
+    <div class="flex flex-row flex-wrap gap-2.5 p-5 min-w-[400px] max-w-[500px] overflow-y-auto items-center bg-white mt-2.5 max-[600px]:min-w-[300px] max-[600px]:max-w-[400px] max-sm:min-w-0 max-sm:w-full max-sm:max-w-full max-sm:flex-1 max-sm:items-start max-sm:content-start">
       <div
         v-for="project in projects"
         :key="project.id"

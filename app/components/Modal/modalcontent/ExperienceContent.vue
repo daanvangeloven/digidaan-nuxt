@@ -2,7 +2,6 @@
 import data from '@/assets/json/experience.json';
 
 const experience = data.experience;
-const skills = data.skills;
 </script>
 
 <template>
@@ -24,18 +23,6 @@ const skills = data.skills;
         </h3>
         <p>{{ job.date }}</p>
         <p>{{ job.description }}</p>
-      </div>
-    </div>
-    <h1 class="text-5xl font-bold max-[600px]:text-3xl">
-      Skills
-    </h1>
-    <div class="skills">
-      <div
-        v-for="(skill, index) in skills"
-        :key="index"
-        class="skill"
-      >
-        <p>{{ skill.name }}</p>
       </div>
     </div>
   </div>

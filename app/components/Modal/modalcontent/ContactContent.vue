@@ -39,7 +39,7 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/daan-van-geloven-644794170/';
 </script>
 
 <template>
-  <div class="flex flex-col w-full font-w95 text-black bg-w95-gray select-none min-w-[480px]">
+  <div class="flex flex-col w-full font-w95 text-black bg-w95-gray select-none min-w-[480px] max-sm:min-w-0">
     <!-- Mail form -->
     <form
       id="contact-form"
@@ -54,11 +54,11 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/daan-van-geloven-644794170/';
         value="contact"
       >
       <!-- Header fields -->
-      <div class="flex flex-col text-[11px] px-2 py-1.5 gap-1 border-b border-b-w95-dark-gray">
-        <div class="flex flex-row items-center gap-2">
+      <div class="flex flex-col text-[11px] px-2 py-1.5 gap-1 border-b border-b-w95-dark-gray max-sm:text-base max-sm:gap-2 max-sm:py-3">
+        <div class="flex flex-row items-center gap-2 max-sm:flex-col max-sm:items-start">
           <label
             for="mail-from"
-            class="w-14 text-right shrink-0"
+            class="w-14 text-right shrink-0 max-sm:w-auto max-sm:text-left"
           >From:</label>
           <input
             id="mail-from"
@@ -68,18 +68,18 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/daan-van-geloven-644794170/';
             required
             autocomplete="email"
             placeholder="your@email.com"
-            class="flex-1 bg-white w95-border-inverse px-1 py-0.5 text-[11px] outline-none font-w95"
+            class="flex-1 bg-white w95-border-inverse px-1 py-0.5 text-[11px] outline-none font-w95 max-sm:text-base max-sm:py-1.5 max-sm:w-full"
           >
         </div>
 
-        <div class="flex flex-row items-center gap-2">
+        <div class="flex flex-row items-center gap-2 max-sm:flex-col max-sm:items-start">
           <span
             id="mail-to-label"
-            class="w-14 text-right shrink-0"
+            class="w-14 text-right shrink-0 max-sm:w-auto max-sm:text-left"
           >To:</span>
           <div
             aria-labelledby="mail-to-label"
-            class="flex-1 bg-w95-gray w95-border-inverse px-1 py-0.5 text-[11px]"
+            class="flex-1 bg-w95-gray w95-border-inverse px-1 py-0.5 text-[11px] max-sm:text-base max-sm:py-1.5 max-sm:w-full"
           >
             <a
               :href="LINKEDIN_URL"
@@ -91,10 +91,10 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/daan-van-geloven-644794170/';
           </div>
         </div>
 
-        <div class="flex flex-row items-center gap-2">
+        <div class="flex flex-row items-center gap-2 max-sm:flex-col max-sm:items-start">
           <label
             for="mail-subject"
-            class="w-14 text-right shrink-0"
+            class="w-14 text-right shrink-0 max-sm:w-auto max-sm:text-left"
           >Subject:</label>
           <input
             id="mail-subject"
@@ -103,7 +103,7 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/daan-van-geloven-644794170/';
             name="subject"
             required
             placeholder="Enter subject..."
-            class="flex-1 bg-white w95-border-inverse px-1 py-0.5 text-[11px] outline-none font-w95"
+            class="flex-1 bg-white w95-border-inverse px-1 py-0.5 text-[11px] outline-none font-w95 max-sm:text-base max-sm:py-1.5 max-sm:w-full"
           >
         </div>
       </div>
@@ -119,7 +119,7 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/daan-van-geloven-644794170/';
         name="body"
         required
         placeholder="Write your message here..."
-        class="flex-1 bg-white w-full resize-none outline-none font-w95 text-[11px] p-2 min-h-[200px] border-none"
+        class="flex-1 bg-white w-full resize-none outline-none font-w95 text-[11px] p-2 min-h-[200px] border-none max-sm:text-base max-sm:min-h-[100px]"
       />
 
       <!-- Send row -->

@@ -12,9 +12,16 @@ const timeOutput = computed(() => {
 const modalStore = useModalStore();
 const { openModal } = modalStore;
 
-const taskbar = computed(() =>
-  modalStore.modals.value.filter(modal => modal.taskbar),
-);
+const { width: windowWidth } = useWindowSize();
+const isMobile = computed(() => windowWidth.value > 0 && windowWidth.value < 640);
+
+const taskbar = computed(() => {
+  const all = modalStore.modals.value.filter(m => m.taskbar);
+  if (isMobile.value) {
+    return all.filter(m => m.id === modalStore.activeModal.value);
+  }
+  return all;
+});
 
 const showStartMenu = ref(false);
 const startButtonRef = ref<HTMLElement>();
@@ -48,7 +55,7 @@ onClickOutside(startButtonRef, (event) => {
     v-if="showStartMenu"
     class="start-menu"
   />
-  <div class="w-screen h-9 text-[0.65rem] p-[7px] select-none bg-w95-gray absolute bottom-0 flex items-center justify-between overflow-hidden">
+  <div class="w-screen h-9 text-[0.65rem] p-[7px] select-none bg-w95-gray absolute bottom-0 flex items-center justify-between overflow-hidden z-[500]">
     <div class="flex items-center text-center align-middle text-black text-[0.65rem] h-6 cursor-pointer">
       <span
         ref="startButtonRef"

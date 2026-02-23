@@ -17,6 +17,7 @@ interface SerializableModal {
 export function useModalStore() {
   const route = useRoute();
   const router = useRouter();
+  const { width: windowWidth } = useWindowSize();
   // Use useLocalStorage for automatic persistence
   const storedModals = useLocalStorage<SerializableModal[]>('modals', [], {
     serializer: {
@@ -128,6 +129,12 @@ export function useModalStore() {
   };
 
   const openModal = async (modalId: string) => {
+    // On mobile, enforce single modal
+    if (import.meta.client && windowWidth.value < 640 && modals.value.length > 0) {
+      modals.value = [];
+      syncToStorage();
+    }
+
     const existingModal = modals.value.find(m => m.id === modalId);
     if (existingModal) {
       existingModal.minimized = false;

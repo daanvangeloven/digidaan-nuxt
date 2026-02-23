@@ -1,5 +1,5 @@
 <template>
-  <div class="p-5 mb-5 flex flex-col gap-5 overflow-y-auto max-w-[70vw] max-h-[70vh] max-md:max-w-full">
+  <div class="p-5 mb-5 flex flex-col gap-5 overflow-y-auto max-w-[70vw] max-h-[70vh] max-md:max-w-full max-sm:max-h-none">
     <h1 class="text-2xl font-bold">
       PVSafe
     </h1>

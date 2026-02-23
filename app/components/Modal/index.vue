@@ -15,12 +15,14 @@ const modal = ref<HTMLElement>();
 const modalHeader = ref<HTMLElement>();
 
 const { width: windowWidth, height: windowHeight } = useWindowSize();
+const isMobile = computed(() => windowWidth.value > 0 && windowWidth.value < 640);
 
 const { x, y, isDragging, style } = useDraggable(modal, {
   initialValue: { x: props.initialX, y: props.initialY },
   handle: modalHeader,
   preventDefault: true,
-  onStart: (position, event) => {
+  disabled: isMobile,
+  onStart: (_position, event) => {
     // Don't drag if clicking on control buttons
     if ((event.target as HTMLElement).closest('.control-button')) {
       return false;
@@ -30,7 +32,7 @@ const { x, y, isDragging, style } = useDraggable(modal, {
 
 // Save position when dragging ends and constrain to viewport
 watch(isDragging, (dragging) => {
-  if (!dragging) {
+  if (!dragging && !isMobile.value) {
     let finalX = x.value;
     let finalY = y.value;
 
@@ -70,13 +72,13 @@ watch(isDragging, (dragging) => {
 <template>
   <div
     ref="modal"
-    class="absolute min-w-[300px] min-h-[200px] max-h-[80vh] max-w-[1024px] bg-w95-gray border-t-2 border-l-2 border-r-2 border-b-2 border-t-white border-l-white border-r-[#393939] border-b-[#393939] overflow-hidden cursor-default"
-    :style="style"
+    class="absolute flex flex-col min-w-[300px] min-h-[200px] max-h-[80vh] max-w-[1024px] bg-w95-gray border-t-2 border-l-2 border-r-2 border-b-2 border-t-white border-l-white border-r-[#393939] border-b-[#393939] overflow-hidden cursor-default max-sm:!fixed max-sm:!top-0 max-sm:!left-0 max-sm:!right-0 max-sm:!bottom-9 max-sm:!w-auto max-sm:!min-w-0 max-sm:!max-w-none max-sm:!max-h-none max-sm:!min-h-0"
+    :style="isMobile ? {} : style"
     @mousedown="bringToFront(id)"
   >
     <div
       ref="modalHeader"
-      class="bg-w95-blue text-white h-6 flex flex-row justify-between items-center text-[10px] leading-[1.5] w-full select-none cursor-pointer"
+      class="bg-w95-blue text-white h-6 flex flex-row justify-between items-center text-[10px] leading-[1.5] w-full select-none cursor-pointer shrink-0"
       @mousedown="bringToFront(id)"
     >
       <div class="flex gap-1 items-center">
@@ -90,7 +92,7 @@ watch(isDragging, (dragging) => {
       </div>
       <div class="flex gap-1 items-center">
         <button
-          class="control-button flex items-center justify-center bg-w95-gray text-black text-[10px] cursor-pointer h-4 w-4 tracking-wide font-bold leading-none w95-button-border"
+          class="control-button max-sm:hidden flex items-center justify-center bg-w95-gray text-black text-[10px] cursor-pointer h-4 w-4 tracking-wide font-bold leading-none w95-button-border"
           @click="minimizeModal(id)"
         >
           —
@@ -103,7 +105,7 @@ watch(isDragging, (dragging) => {
         </button>
       </div>
     </div>
-    <div class="flex flex-grow max-h-[inherit] overflow-y-auto bg-w95-gray">
+    <div class="flex flex-1 overflow-y-auto bg-w95-gray">
       <slot name="modal-content" />
     </div>
   </div>

@@ -14,7 +14,7 @@ const screens = data.screens.filter(
 </script>
 
 <template>
-  <div class="bg-w95-gray absolute bottom-[34px] left-0 flex border-2 w-[350px] h-[270px] select-none border-t-w95-border-light border-l-w95-border-light border-b-w95-border-dark border-r-w95-border-dark">
+  <div class="bg-w95-gray absolute bottom-[34px] left-0 flex border-2 w-[350px] h-[270px] select-none border-t-w95-border-light border-l-w95-border-light border-b-w95-border-dark border-r-w95-border-dark z-[501] max-sm:w-screen max-sm:h-auto">
     <div class="flex bg-w95-dark-gray text-w95-gray text-base p-2 pt-2 pb-0 pl-4 [writing-mode:vertical-rl] rotate-180 font-bold text-start">
       Digidaan DaanOS <span class="text-white">'02</span>
     </div>
