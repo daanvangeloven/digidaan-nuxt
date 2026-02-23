@@ -1,4 +1,6 @@
 <script setup lang="ts">
+useSeoMeta({ robots: 'noindex, nofollow' });
+
 const navigation = [
   { name: 'Overview', path: '/showcase' },
   { name: 'Buttons', path: '/showcase/buttons' },

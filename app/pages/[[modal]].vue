@@ -1,21 +1,56 @@
 <script setup lang="ts">
+import screensData from '@/assets/json/screens.json';
+import ContactContent from '@/components/Modal/modalcontent/ContactContent.vue';
 import { useModalStore } from '@/composables/useModals';
 
 const modalStore = useModalStore();
 const loading = ref(true);
+const route = useRoute();
 
-onMounted(() => {
-  loading.value = false;
+const activeScreen = computed(() =>
+  screensData.screens.find(s => s.id === route.params.modal),
+);
+
+const defaultTitle = 'Digidaan DaanOS \'02';
+const defaultDescription = 'A Windows 95 inspired portfolio for my front-end development work.';
+
+useSeoMeta({
+  title: () => activeScreen.value?.seoTitle ?? defaultTitle,
+  description: () => activeScreen.value?.seoDescription ?? defaultDescription,
+  ogTitle: () => activeScreen.value?.seoTitle ?? 'Digidaan - Daan van Geloven',
+  ogDescription: () => activeScreen.value?.seoDescription ?? 'Go back in time with my Windows 95 inspired portfolio. Built with NuxtJS and Vue 3.',
+  ogUrl: () => `https://digidaan.io/${activeScreen.value?.id ?? ''}`,
 });
 
 useHead({
+  link: [
+    {
+      rel: 'canonical',
+      href: () => `https://digidaan.io/${activeScreen.value?.id ?? ''}`,
+    },
+  ],
   bodyAttrs: {
     class: 'reset-body',
   },
 });
+
+onMounted(() => {
+  loading.value = false;
+  if (route.params.modal) {
+    modalStore.openModal(route.params.modal as string);
+  }
+});
 </script>
 
 <template>
+  <!-- Statically rendered for Netlify form detection on /contact -->
+  <div
+    v-if="route.params.modal === 'contact'"
+    style="display:none"
+    aria-hidden="true"
+  >
+    <ContactContent />
+  </div>
   <LoadingBar
     v-if="loading"
     class="loading"

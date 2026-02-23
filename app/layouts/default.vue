@@ -29,6 +29,21 @@ useHead({
   bodyAttrs: {
     class: 'reset-body',
   },
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        'name': 'Daan van Geloven',
+        'jobTitle': 'Front-end Developer',
+        'url': 'https://digidaan.io',
+        'sameAs': [
+          'https://www.linkedin.com/in/daan-van-geloven-644794170/',
+        ],
+      }),
+    },
+  ],
 });
 </script>
 

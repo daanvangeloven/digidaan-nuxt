@@ -15,6 +15,8 @@ interface SerializableModal {
 }
 
 export function useModalStore() {
+  const route = useRoute();
+  const router = useRouter();
   // Use useLocalStorage for automatic persistence
   const storedModals = useLocalStorage<SerializableModal[]>('modals', [], {
     serializer: {
@@ -81,6 +83,8 @@ export function useModalStore() {
   const addModal = async (screenData: any) => {
     const component = await loadComponent(screenData.content);
     if (component) {
+      if (modals.value.find(m => m.id === screenData.id))
+        return;
       const newModal: Modal = {
         id: screenData.id,
         title: screenData.title,
@@ -117,6 +121,9 @@ export function useModalStore() {
       existingModal.zIndex = zIndexCounter.value++;
       activeModal.value = modalId;
       syncToStorage();
+      if (import.meta.client) {
+        router.replace(`/${modalId}`);
+      }
     }
   };
 
@@ -138,6 +145,9 @@ export function useModalStore() {
   const closeModal = (modalId: string) => {
     modals.value = modals.value.filter(modal => modal.id !== modalId);
     syncToStorage();
+    if (import.meta.client && route.params.modal === modalId) {
+      router.replace('/');
+    }
   };
 
   const minimizeModal = (modalId: string) => {

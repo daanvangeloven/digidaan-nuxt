@@ -6,7 +6,9 @@
       "icon": "profile.png",
       "content": "ProfileContent",
       "onDesktop": true,
-      "onStartMenu": true
+      "onStartMenu": true,
+      "seoTitle": "Daan van Geloven – Front-end Developer",
+      "seoDescription": "Daan van Geloven is a Front-end Developer based in the Netherlands, specialising in Vue 3, Nuxt, and modern web interfaces."
     },
     {
       "id": "about",
@@ -14,7 +16,9 @@
       "icon": "help.png",
       "content": "AboutContent",
       "onDesktop": true,
-      "onStartMenu": true
+      "onStartMenu": true,
+      "seoTitle": "About – Daan van Geloven, Front-end Developer",
+      "seoDescription": "Daan van Geloven is a Front-end Developer at Social Deal, working on Nuxt migrations, component libraries, and back-office interfaces in the Netherlands."
     },
     {
       "id": "projects",
@@ -22,7 +26,9 @@
       "icon": "projects.png",
       "content": "ProjectContent",
       "onDesktop": true,
-      "onStartMenu": true
+      "onStartMenu": true,
+      "seoTitle": "Projects – Daan van Geloven",
+      "seoDescription": "A showcase of front-end and full-stack projects by Daan van Geloven, including PVSafe, a Summa College card game, PBMA, PGT Veldhoven, and Wimereux."
     },
     {
       "id": "experience",
@@ -30,7 +36,9 @@
       "icon": "experience.png",
       "content": "ExperienceContent",
       "onDesktop": true,
-      "onStartMenu": true
+      "onStartMenu": true,
+      "seoTitle": "Experience & Skills – Daan van Geloven",
+      "seoDescription": "Work history and technical skills of Daan van Geloven — Vue 3, Nuxt, TypeScript, Tailwind CSS, and more."
     },
     {
       "id": "contact",
@@ -38,7 +46,9 @@
       "icon": "contact.png",
       "content": "ContactContent",
       "onDesktop": true,
-      "onStartMenu": true
+      "onStartMenu": true,
+      "seoTitle": "Contact Daan van Geloven",
+      "seoDescription": "Get in touch with Daan van Geloven, Front-end Developer based in the Netherlands. Available for freelance projects and collaborations."
     },
     {
       "id": "computer",
@@ -46,7 +56,9 @@
       "icon": "computer.png",
       "content": "ComputerContent",
       "onDesktop": true,
-      "onStartMenu": true
+      "onStartMenu": true,
+      "seoTitle": "Digidaan DaanOS '02",
+      "seoDescription": "A Windows 95 inspired portfolio for Daan van Geloven's front-end development work. Built with Nuxt 3 and Vue 3."
     },
     {
       "id": "pvsafe",
@@ -54,7 +66,9 @@
       "icon": "computer.png",
       "content": "PVSafeContent",
       "onDesktop": false,
-      "onStartMenu": false
+      "onStartMenu": false,
+      "seoTitle": "PVSafe – Project by Daan van Geloven",
+      "seoDescription": "PVSafe: a three-system voucher and appointment platform built with WordPress, WooCommerce, ASP.NET Core MVC, and Tailwind CSS."
     },
     {
       "id": "summa",
@@ -62,7 +76,9 @@
       "icon": "computer.png",
       "content": "SummaContent",
       "onDesktop": false,
-      "onStartMenu": false
+      "onStartMenu": false,
+      "seoTitle": "Summa College Card Game – Project by Daan van Geloven",
+      "seoDescription": "A digital card game for Summa College that helps students identify learning obstacles and find personalised solutions using smart relevance sorting."
     },
     {
       "id": "pbma",
@@ -70,7 +86,9 @@
       "icon": "computer.png",
       "content": "PBMAContent",
       "onDesktop": false,
-      "onStartMenu": false
+      "onStartMenu": false,
+      "seoTitle": "PBMA – Project by Daan van Geloven",
+      "seoDescription": "PBMA project developed by Daan van Geloven. A front-end development case study from his portfolio."
     },
     {
       "id": "pgt",
@@ -78,7 +96,9 @@
       "icon": "computer.png",
       "content": "PGTContent",
       "onDesktop": false,
-      "onStartMenu": false
+      "onStartMenu": false,
+      "seoTitle": "PGT Veldhoven – Project by Daan van Geloven",
+      "seoDescription": "PGT Veldhoven project developed by Daan van Geloven. A front-end development case study from his portfolio."
     },
     {
       "id": "wimereux",
@@ -86,7 +106,9 @@
       "icon": "computer.png",
       "content": "WimereuxContent",
       "onDesktop": false,
-      "onStartMenu": false
+      "onStartMenu": false,
+      "seoTitle": "Wimereux – Project by Daan van Geloven",
+      "seoDescription": "Wimereux project developed by Daan van Geloven. A front-end development case study from his portfolio."
     }
   ]
 }
