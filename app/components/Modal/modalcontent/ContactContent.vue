@@ -7,28 +7,35 @@ const sending = ref(false);
 const sent = ref(false);
 
 const TO_EMAIL = 'daan@digidaan.nl';
+const WEB3FORMS_KEY = 'b6b320d0-2efa-43d1-9f94-40af7e84fd62';
 
 async function handleSend() {
   sending.value = true;
   status.value = 'Sending...';
 
   try {
-    await fetch('/', {
+    const response = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        'form-name': 'contact',
-        'from': from.value,
-        'subject': subject.value,
-        'body': body.value,
-      }).toString(),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        email: from.value,
+        subject: subject.value,
+        message: body.value,
+      }),
     });
+
+    const data = await response.json();
+
+    if (!data.success) {
+      throw new Error(data.message ?? 'Submission failed');
+    }
 
     sent.value = true;
     status.value = 'Message sent successfully.';
   }
-  catch {
-    status.value = 'Error: Failed to send message. Please try again.';
+  catch (err) {
+    status.value = err instanceof Error ? `Error: ${err.message}` : 'Error: Failed to send message. Please try again.';
   }
   finally {
     sending.value = false;
@@ -43,16 +50,9 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/daan-van-geloven-644794170/';
     <!-- Mail form -->
     <form
       id="contact-form"
-      name="contact"
-      data-netlify="true"
       class="flex flex-col flex-1"
       @submit.prevent="handleSend"
     >
-      <input
-        type="hidden"
-        name="form-name"
-        value="contact"
-      >
       <!-- Header fields -->
       <div class="flex flex-col text-[11px] px-2 py-1.5 gap-1 border-b border-b-w95-dark-gray max-sm:text-base max-sm:gap-2 max-sm:py-3">
         <div class="flex flex-row items-center gap-2 max-sm:flex-col max-sm:items-start">
