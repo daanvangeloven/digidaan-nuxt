@@ -26,6 +26,11 @@
       "image": "address_book_home.png"
     },
     {
+      "id": "pricescout",
+      "title": "Pricescout",
+      "image": "groot.png"
+    },
+    {
       "id": "contact",
       "title": "Your project",
       "image": "help.png"

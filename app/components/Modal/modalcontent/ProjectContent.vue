@@ -45,7 +45,7 @@ function itemClick(modalId: string) {
         class="flex flex-col items-center gap-[5px] p-2.5 w-[30%] cursor-pointer max-[600px]:w-[40%]"
         @click="itemClick(project.id)"
       >
-        <img :src="`/img/icons/${project.image}`" class="w-[30px] h-[30px]">
+        <img :src="`/img/icons/${project.image}`" class="w-[35px] h-[35px] object-contain">
         <span class="text-xs">{{ project.title }}</span>
       </div>
     </div>

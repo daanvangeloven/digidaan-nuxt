@@ -109,6 +109,16 @@
       "onStartMenu": false,
       "seoTitle": "Wimereux – Project by Daan van Geloven",
       "seoDescription": "Wimereux project developed by Daan van Geloven. A front-end development case study from his portfolio."
+    },
+    {
+      "id": "pricescout",
+      "title": "PriceScout — Product Page",
+      "icon": "computer.png",
+      "content": "PriceScoutContent",
+      "onDesktop": false,
+      "onStartMenu": false,
+      "seoTitle": "Product Page – Project by Daan van Geloven",
+      "seoDescription": "Product Page project developed by Daan van Geloven. A product page to display products on the pricescout website."
     }
   ]
 }
