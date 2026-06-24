@@ -119,6 +119,16 @@
       "onStartMenu": false,
       "seoTitle": "Product Page – Project by Daan van Geloven",
       "seoDescription": "Product Page project developed by Daan van Geloven. A product page to display products on the pricescout website."
+    },
+    {
+      "id": "gewoondeze",
+      "title": "gewoondeze.nl",
+      "icon": "computer.png",
+      "content": "GewoondezeContent",
+      "onDesktop": false,
+      "onStartMenu": false,
+      "seoTitle": "gewoondeze.nl – Project by Daan van Geloven",
+      "seoDescription": "gewoondeze.nl is a Dutch editorial product recommendation site built by Daan van Geloven, picking one winner per category instead of top-10 lists."
     }
   ]
 }

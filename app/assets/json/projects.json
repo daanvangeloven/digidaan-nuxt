@@ -31,6 +31,11 @@
       "image": "groot.png"
     },
     {
+      "id": "gewoondeze",
+      "title": "gewoondeze.nl",
+      "image": "gewoondeze.png"
+    },
+    {
       "id": "contact",
       "title": "Your project",
       "image": "help.png"
