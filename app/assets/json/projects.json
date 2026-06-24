@@ -1,14 +1,29 @@
 {
   "projects": [
     {
+      "id": "nuxt-realtime",
+      "title": "nuxt-realtime",
+      "image": "realtime.png"
+    },
+    {
       "id": "pvsafe",
       "title": "PVSafe",
       "image": "pvsafe.png"
     },
     {
+      "id": "gewoondeze",
+      "title": "gewoondeze.nl",
+      "image": "gewoondeze.png"
+    },
+    {
       "id": "summa",
       "title": "Summa College",
       "image": "cardgame.png"
+    },
+    {
+      "id": "pricescout",
+      "title": "Pricescout",
+      "image": "groot.png"
     },
     {
       "id": "pbma",
@@ -24,21 +39,6 @@
       "id": "wimereux",
       "title": "Wimereux",
       "image": "address_book_home.png"
-    },
-    {
-      "id": "pricescout",
-      "title": "Pricescout",
-      "image": "groot.png"
-    },
-    {
-      "id": "gewoondeze",
-      "title": "gewoondeze.nl",
-      "image": "gewoondeze.png"
-    },
-    {
-      "id": "nuxt-realtime",
-      "title": "nuxt-realtime",
-      "image": "realtime.png"
     },
     {
       "id": "contact",
