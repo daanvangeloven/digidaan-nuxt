@@ -15,9 +15,13 @@ interface SerializableModal {
 }
 
 export function useModalStore() {
-  const route = useRoute();
   const router = useRouter();
   const { width: windowWidth } = useWindowSize();
+
+  const setUrlModal = (modalId: string) => {
+    if (!import.meta.client) return;
+    router.options.history.replace(modalId ? `/${modalId}` : '/');
+  };
   // Use useLocalStorage for automatic persistence
   const storedModals = useLocalStorage<SerializableModal[]>('modals', [], {
     serializer: {
@@ -122,9 +126,7 @@ export function useModalStore() {
       existingModal.zIndex = zIndexCounter.value++;
       activeModal.value = modalId;
       syncToStorage();
-      if (import.meta.client) {
-        router.replace(`/${modalId}`);
-      }
+      setUrlModal(modalId);
     }
   };
 
@@ -152,8 +154,8 @@ export function useModalStore() {
   const closeModal = (modalId: string) => {
     modals.value = modals.value.filter(modal => modal.id !== modalId);
     syncToStorage();
-    if (import.meta.client && route.params.modal === modalId) {
-      router.replace('/');
+    if (import.meta.client && window.location.pathname === `/${modalId}`) {
+      setUrlModal('');
     }
   };
 

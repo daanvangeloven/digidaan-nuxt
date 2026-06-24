@@ -36,6 +36,11 @@
       "image": "gewoondeze.png"
     },
     {
+      "id": "nuxt-realtime",
+      "title": "nuxt-realtime",
+      "image": "realtime.png"
+    },
+    {
       "id": "contact",
       "title": "Your project",
       "image": "help.png"

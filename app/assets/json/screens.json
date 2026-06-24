@@ -129,6 +129,16 @@
       "onStartMenu": false,
       "seoTitle": "gewoondeze.nl – Project by Daan van Geloven",
       "seoDescription": "gewoondeze.nl is a Dutch editorial product recommendation site built by Daan van Geloven, picking one winner per category instead of top-10 lists."
+    },
+    {
+      "id": "nuxt-realtime",
+      "title": "nuxt-realtime",
+      "icon": "computer.png",
+      "content": "NuxtRealtimeContent",
+      "onDesktop": false,
+      "onStartMenu": false,
+      "seoTitle": "nuxt-realtime – Project by Daan van Geloven",
+      "seoDescription": "nuxt-realtime is an open-source Nuxt module by Daan van Geloven that adds real-time cross-client state synchronization on top of Socket.IO via a single useRealtimeState composable."
     }
   ]
 }
