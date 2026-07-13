@@ -5,6 +5,10 @@ export default defineNuxtConfig({
 
   modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt'],
 
+  runtimeConfig: {
+    openrouterApiKey: '',
+  },
+
   components: [
     {
       path: '~/components',

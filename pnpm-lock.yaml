@@ -17,6 +17,9 @@ importers:
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
+      clippyjs:
+        specifier: ^0.1.0
+        version: 0.1.0
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1705,6 +1708,9 @@ packages:
   clipboardy@5.0.0:
     resolution: {integrity: sha512-MQfKHaD09eP80Pev4qBxZLbxJK/ONnqfSYAPlCmPh+7BDboYtO/3BmB6HGzxDIT0SlTRc2tzS8lQqfcdLtZ0Kg==}
     engines: {node: '>=20'}
+
+  clippyjs@0.1.0:
+    resolution: {integrity: sha512-XnchzSR8H8X43TvwnAktK5xDewKGSyfGu8DagBZCbOUdx0dWAFrFdxdCWlaJkyfx4M3Amvvu13jbHQ/IYQOD+w==}
 
   cliui@8.0.1:
     resolution: {integrity: sha512-BSeNnyus75C4//NQ9gQt1/csTXyo/8Sb+afLAkzAptFuMsod9HFokGNudZpi/oQV73hnVK+sR+5PVRMd+Dr7YQ==}
@@ -6499,6 +6505,8 @@ snapshots:
       is-wayland: 0.1.0
       is-wsl: 3.1.0
       is64bit: 2.0.0
+
+  clippyjs@0.1.0: {}
 
   cliui@8.0.1:
     dependencies:
