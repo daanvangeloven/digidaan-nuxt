@@ -1,8 +1,25 @@
 <script setup lang="ts">
 type ClippyAgent = Awaited<ReturnType<(typeof import('clippyjs'))['initAgent']>>;
 
-const GREETING = 'It looks like you\'re browsing Daan\'s portfolio. Is there anything you\'d like to know?';
+const GREETINGS = [
+  'It looks like you\'re browsing Daan\'s portfolio. Is there anything you\'d like to know?',
+  'Hi! I\'m Clippy. Want to know more about Daan?',
+  'It looks like you\'re looking at a portfolio! Need a tour guide?',
+  'Oh hey! Ask me anything about Daan\'s work.',
+  'It looks like you\'re trying to learn about Daan. Fire away!',
+];
+const THINKING_PHRASES = [
+  'Thinking...',
+  'Hmm, let me see...',
+  'One moment...',
+  'Consulting my paperclip wisdom...',
+  'Digging through the archives...',
+];
 const FALLBACK_REPLY = 'Uh oh, my brain isn\'t working right now. Try asking again in a bit?';
+
+function pickRandom(options: string[]) {
+  return options[Math.floor(Math.random() * options.length)]!;
+}
 
 const INPUT_GAP = 8;
 // Toolbar/index.vue's taskbar is h-9 (36px) - keep the input bar clear of it.
@@ -64,15 +81,14 @@ function say(text: string) {
   agent?.speak(text, true);
 }
 
-// No bubble while waiting - just the gesture. play() auto-exits after 5s
-// even if the request is slower, and clippyjs falls back to idle fidgeting
-// until say() interrupts it once the reply is in.
+// play() auto-exits after 5s even if the request is slower, and clippyjs
+// falls back to idle fidgeting until say() interrupts it once the reply is in.
 function think() {
   if (!agent)
     return;
   agent.stopCurrent();
-  agent._balloon.hide(true);
   agent.play('Thinking');
+  agent.speak(pickRandom(THINKING_PHRASES), false);
 }
 
 watch(state, (value) => {
@@ -81,7 +97,7 @@ watch(state, (value) => {
   if (value === 'active') {
     agent.show(false);
     agent.play('Greeting');
-    say(GREETING);
+    say(pickRandom(GREETINGS));
     trackHandle = requestAnimationFrame(trackPosition);
     scheduleFunAnimation();
   }
