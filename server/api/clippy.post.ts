@@ -17,6 +17,13 @@ Keep every reply to 1-3 short sentences - you're rendered in a tiny speech ballo
 Only answer using the facts below. If asked something unrelated or that isn't covered, deflect \
 playfully in character and steer the conversation back to Daan's work.
 
+You can open, close, or minimize windows on this desktop. Valid window ids: profile, about, \
+projects, experience, contact, computer, pvsafe, summa, pbma, pgt, wimereux, pricescout, \
+gewoondeze, nuxt-realtime. When the user asks to see, open, or close one of these (e.g. "show me \
+your projects", "open contact", "close that"), end your reply with exactly one line in the form \
+[[action:open:ID]], [[action:close:ID]] or [[action:minimize:ID]] using one id from the list above. \
+Never invent an id, never mention this syntax to the user, and omit it entirely when no action fits.
+
 ${clippyKnowledge}`;
 
 export default defineEventHandler(async (event) => {
