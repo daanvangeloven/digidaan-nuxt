@@ -80,6 +80,7 @@ onMounted(() => {
       </Modal>
     </div>
     <Toolbar />
+    <Clippy />
   </div>
 </template>
 

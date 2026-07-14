@@ -12,6 +12,32 @@ const timeOutput = computed(() => {
 const modalStore = useModalStore();
 const { openModal } = modalStore;
 
+const { state: clippyState, activate: activateClippy } = useClippy();
+
+// Reuses clippyjs's own bundled sprite sheet for the tray icon (frame [0,0],
+// Clippy's resting pose) instead of shipping a separate icon asset.
+const CLIPPY_FRAME_WIDTH = 124;
+const CLIPPY_FRAME_HEIGHT = 93;
+const CLIPPY_ICON_SIZE = 20;
+const CLIPPY_ICON_SCALE = CLIPPY_ICON_SIZE / CLIPPY_FRAME_HEIGHT;
+const clippyMapUrl = ref('');
+
+onMounted(async () => {
+  const { Clippy } = await import('clippyjs/agents');
+  const { default: mapUrl } = await Clippy.map();
+  clippyMapUrl.value = mapUrl;
+});
+
+const clippyIconStyle = computed(() => ({
+  width: `${CLIPPY_FRAME_WIDTH}px`,
+  height: `${CLIPPY_FRAME_HEIGHT}px`,
+  backgroundImage: `url(${clippyMapUrl.value})`,
+  backgroundPosition: '0 0',
+  backgroundRepeat: 'no-repeat',
+  transformOrigin: 'top left',
+  transform: `scale(${CLIPPY_ICON_SCALE})`,
+}));
+
 const { width: windowWidth } = useWindowSize();
 const isMobile = computed(() => windowWidth.value > 0 && windowWidth.value < 640);
 
@@ -83,6 +109,23 @@ onClickOutside(startButtonRef, (event) => {
           :src="`img/icons/${tab.icon}`"
         >
         <span>{{ tab.title }}</span>
+      </div>
+    </div>
+    <div
+      v-if="clippyState === 'docked'"
+      class="mr-0.5 px-1 cursor-pointer flex items-center justify-center h-6 w95-border-inverse shrink-0"
+      title="Ask Clippy"
+      @click="activateClippy"
+    >
+      <div
+        class="relative overflow-hidden"
+        :style="{ width: `${CLIPPY_FRAME_WIDTH * CLIPPY_ICON_SCALE}px`, height: `${CLIPPY_ICON_SIZE}px` }"
+      >
+        <div
+          v-if="clippyMapUrl"
+          class="absolute top-0 left-0"
+          :style="clippyIconStyle"
+        />
       </div>
     </div>
     <div class="py-[5px] mr-0.5 px-1 text-black cursor-pointer whitespace-nowrap flex items-center text-center align-middle text-[0.65rem] h-6 w95-border-inverse">
