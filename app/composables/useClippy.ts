@@ -5,9 +5,5 @@ export function useClippy() {
     state.value = 'active';
   };
 
-  const dismiss = () => {
-    state.value = 'docked';
-  };
-
-  return { state, activate, dismiss };
+  return { state, activate };
 }
